@@ -1,0 +1,12 @@
+<% provide(:title, @user.name) %>
+<div class="row">
+  <div class="col-md-4">
+    <%= render 'user_info' %>
+  </div>
+  <div class="col-md-8">
+    <ul class="nav nav-tabs">
+      <li><%= link_to '关注者', followers_user_path(@user) %></li>
+      <li><%= link_to '正在关注', following_user_path(@user) %></li>
+    </ul>
+  </div>
+</div>

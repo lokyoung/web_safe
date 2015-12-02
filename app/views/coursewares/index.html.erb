@@ -1,0 +1,18 @@
+<% provide(:title, '课件') %>
+<div class="row">
+  <div class="col-md-9">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        课件列表
+      </div>
+      <%= render 'panel/item_list', contents: @coursewares %>
+    </div>
+    <%= paginate @coursewares %>
+  </div>
+  <div class="col-md-3">
+    <%= render 'panel/user_info' %>
+    <% if teacher? %>
+      <%= render 'panel/new_item', content: 'courseware', title: '新增课件'  %>
+    <% end %>
+  </div>
+</div>

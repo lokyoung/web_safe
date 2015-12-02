@@ -1,0 +1,5 @@
+- admin
+ - admin namespace and route
+ - manage users
+ - manage course and homework
+ - manage question and answer

@@ -1,0 +1,41 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <%= "已经有#{@homework.stuhomeworks.count} 人次提交作业" %>
+  </div>
+  <table class="table table-striped">
+    <tr>
+      <td>用户名</td>
+      <td>学号</td>
+      <td>班级</td>
+      <td>是否批改</td>
+      <td>分数</td>
+    </tr>
+    <% @homework.stuhomeworks.each do |stuhomework| %>
+      <tr>
+        <td><%= stuhomework.user.name %></td>
+        <td><%= stuhomework.user.sid %></td>
+        <td><%= stuhomework.user.sclass %></td>
+        <td><%= stuhomework.ischecked %></td>
+        <td><%= stuhomework.mark %></td>
+        <% if teacher? %>
+          <td><a href="#{<%= stuhomework.stuhomeworkfile %>}">下载作业</a></td>
+          <td><%= link_to '评分', check_homework_stuhomework_path(@homework, stuhomework) %></td>
+        <% end %>
+        <!--用户可以在老师批改之前修改或者删除自己的作业-->
+        <% if current_user == stuhomework.user && !stuhomework.ischecked %>
+          <td><%= link_to edit_homework_stuhomework_path(@homework, stuhomework) do %>
+            <span class="glyphicon glyphicon-pencil"></span>
+          <% end %> |
+          <%= link_to homework_stuhomework_path(@homework, stuhomework), method: :delete, data: { confirm: '确定要删除么' } do %>
+            <span class="glyphicon glyphicon-trash"></span>
+          <% end %>
+        </td>
+        <% end %>
+
+      </tr>
+    <% end %>
+  </table>
+</div>
+<% if student? %>
+  <%= render 'stuhomeworks/form' %>
+<% end %>

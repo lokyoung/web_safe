@@ -1,0 +1,27 @@
+<% provide(:title, '班级') %>
+<div class="row">
+  <div class="col-md-9">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        班级列表
+      </div>
+      <ul class="list-group">
+        <% @stuclasses.each do |stuclass| %>
+        <li class="list-group-item">
+          <%= link_to stuclass.scname, stuclass %>
+          <span style="float: right">
+            <%= link_to '删除', stuclass, method: :delete, data: { confirm: "确定要删除么？" } %>
+          </span>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+    <%= paginate @stuclasses %>
+  </div>
+  <div class="col-md-3">
+    <%= render 'panel/user_info' %>
+    <% if teacher? %>
+    <%= render 'panel/new_stuclass' %>
+    <% end %>
+  </div>
+</div>

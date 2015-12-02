@@ -1,0 +1,6 @@
+<%= link_to send("edit_admin_#{obj.class.to_s.downcase}_path", obj) do %>
+  <span class="glyphicon glyphicon-pencil"></span>
+<% end %> |
+<%= link_to send("admin_#{obj.class.to_s.downcase}_path", obj), method: :delete, data: { confirm: '确定要删除么' } do %>
+  <span class="glyphicon glyphicon-trash"></span>
+<% end %>

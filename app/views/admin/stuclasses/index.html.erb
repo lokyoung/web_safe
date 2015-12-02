@@ -1,0 +1,19 @@
+<div class="panel panel-default">
+  <div class="panel-heading">班级列表</div>
+  <table class="table">
+    <tr>
+      <td>班级名称</td>
+      <td>班级人数</td>
+      <td>班级成员</td>
+    </tr>
+    <% @stuclasses.each do |stuclass| %>
+      <tr>
+        <td><%= stuclass.scname %></td>
+        <td><%= stuclass.students.count %></td>
+        <td><%= link_to '点此查看', admin_stuclass_path(stuclass) %></td>
+        <td><%= render 'admin/panel/edit_delete', obj: stuclass %></td>
+      </tr>
+    <% end %>
+  </table>
+  <%= paginate @stuclasses %>
+</div>

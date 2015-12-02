@@ -1,0 +1,12 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    班级信息修改
+  </div>
+  <div class="panel-body">
+    <%= form_for [:admin, @stuclass] do |f| %> 
+      <%= f.label :scname, '班级名称' %>
+      <%= f.text_field :scname, class: 'form-control' %>
+      <%= f.submit '保存修改', class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>

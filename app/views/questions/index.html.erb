@@ -1,0 +1,35 @@
+<% provide(:title, '问答') %>
+<div class="row">
+  <div class="col-md-9">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        知识问答
+      </div>
+      <ul class="list-group">
+        <% @questions.each do |question| %>
+          <% if question.issolved? %>
+            <li class="list-group-item list-group-item-success">
+            <%= user_avatar question.user %>
+            [已解决]
+          <% else %>
+            <li class="list-group-item list-group-item-warning">
+            <%= user_avatar question.user %>
+            [未解决]
+          <% end %>
+          <%= link_to question.title, question %>
+          <!-- <% if current_user.teacher?%>
+          <span style="float: right">
+            <%= link_to '删除问题', question, method: :delete, data: { confirm: "确定要删除么？" } %>
+          </span>
+        <% end %> -->
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <%= paginate @questions %>
+</div>
+<div class="col-md-3">
+  <%= render 'panel/user_info' %>
+  <%= render 'panel/new_item', content: 'question', title: '新建问题' %>
+</div>
+</div>

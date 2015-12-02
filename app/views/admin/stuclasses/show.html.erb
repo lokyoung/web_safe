@@ -1,0 +1,24 @@
+<% provide(:title, '班级学生管理') %>
+<div class="row">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <%= @stuclass.scname %>
+    </div>
+    <table class="table table-striped">
+      <tr>
+        <td>用户名</td>
+        <td>学号</td>
+        <td>Email</td>
+        <td></td>
+      </tr>
+      <% @stuclass.students.each do |student| %>
+        <tr>
+          <td><%= link_to student.name, user_path(student) %></td>
+          <td><%= student.sid %></td>
+          <td><%= student.email %></td>
+          <td><%= link_to '从该班级删除该学生', remove_student_admin_stuclass_path(@stuclass, student_id: student.id) %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

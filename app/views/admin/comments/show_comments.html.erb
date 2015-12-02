@@ -1,0 +1,18 @@
+<div class="panel panel-default">
+  <div class="panel-heading">评论列表</div>
+  <table class="table">
+    <tr>
+      <td>内容</td>
+      <td>发布者</td>
+    </tr>
+    <% @comments.each do |comments| %>
+      <tr>
+        <td><%= comments.content %></td>
+        <td><%= comments.user.name %></td>
+        <td><%= render 'admin/panel/edit_delete', obj: comments %></td>
+      </tr>
+    <% end %>
+  </table>
+  <%= paginate @comments %>
+</div>
+

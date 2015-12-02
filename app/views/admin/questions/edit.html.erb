@@ -1,0 +1,19 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    问题修改
+  </div>
+  <div class="panel-body">
+    <%= form_for [:admin, @question] do |f| %> 
+      <%= f.label :title, '标题' %>
+      <%= f.text_field :title, class: 'form-control' %>
+      <%= f.label :content, '内容' %>
+      <%= f.text_field :content, class: 'form-control' %>
+      <label>发布者</label>
+      <input class="form-control" type="text" readonly="value" value="<%= @question.user.name %>">
+      <%= f.label :issolved, '是否解决' %>
+      <%= f.radio_button(:issolved, true) %>是
+      <%= f.radio_button(:issolved, false) %>否
+      <%= f.submit '保存修改', class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>

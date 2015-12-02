@@ -1,0 +1,24 @@
+<div class="panel panel-default">
+  <div class="panel-heading">答案列表</div>
+  <table class="table">
+    <tr>
+      <td>答案内容</td>
+      <td>发布者</td>
+      <td>评论</td>
+    </tr>
+    <% @answers.each do |answer| %>
+      <tr>
+        <td><%= answer.content %></td>
+        <td><%= answer.user.name %></td>
+        <td><%= link_to '点击查看', show_comments_admin_question_answer_path(id: answer.id) %></td>
+        <td><%= link_to edit_admin_question_answer_path(@question, answer) do %>
+          <span class="glyphicon glyphicon-pencil"></span>
+        <% end %> |
+        <%= link_to admin_question_answer_path(@question, answer), method: :delete, data: { confirm: '确定要删除么' } do %>
+          <span class="glyphicon glyphicon-trash"></span>
+        <% end %></td>
+    </tr>
+  <% end %>
+  <%= paginate @answers %>
+</table>
+</div>

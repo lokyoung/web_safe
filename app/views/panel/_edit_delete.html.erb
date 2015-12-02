@@ -1,0 +1,8 @@
+<% if current_user == item.user %>
+  <%= link_to send("edit_#{item.class.to_s.downcase}_path", item) do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+  <% end %> |
+  <%= link_to item, method: :delete, data: { confirm: '确定要删除么' } do %>
+    <span class="glyphicon glyphicon-trash"></span>
+  <% end %>
+<% end %>

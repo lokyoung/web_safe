@@ -1,0 +1,25 @@
+<% provide(:title, @courseware.title) %>
+<div class="row">
+  <div class="col-md-9">
+
+    <div class="panel panel-default">
+      <%= render 'panel/author_panel' , content: @courseware %>
+      <div class="panel-body">
+        <p><%= @courseware.description %></p>
+        <a href="<%= @courseware.coursefile %>">下载课件</a>
+      </div>
+
+      <div class="panel-footer">
+        <div class="row">
+          <div class="col-md-12 text-right">
+            <%= render 'edit_delete' %>
+          </div>
+        </div>
+      </div>
+
+  </div>
+  </div>
+  <div class="col-md-3">
+    <%= render 'panel/user_info' %>
+  </div>
+</div>

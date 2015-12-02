@@ -1,0 +1,22 @@
+<% provide(:title, @question.title) %>
+<div class="row">
+  <div class="col-md-9">
+    <div class="panel panel-default">
+     <%= render 'panel/author_panel', content: @question %>
+      <div class="panel-body">
+        <p><%= @question.content %></p>
+      </div>
+      <div class="panel-footer">
+        <div class="row">
+          <div class="col-md-12 text-right">
+            <%= render 'panel/edit_delete', item: @question %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%= render 'answers/show' %>
+  </div>
+  <div class="col-md-3">
+    <%= render 'panel/user_info' %>
+  </div>
+</div>

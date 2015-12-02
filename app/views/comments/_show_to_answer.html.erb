@@ -1,0 +1,11 @@
+<%= answer.comments.count %>条评论
+<ul class="list-group">
+  <% answer.comments.each do |comment| %>
+    <li class="list-group-item">
+    <%= link_to comment.user.name, comment.user %>
+    <small><%= time_ago_in_words comment.created_at %> ago</small>
+    <p><%= comment.content %></p>
+    </li>
+  <% end %>
+</ul>
+<%= render 'comments/new', item: answer %>

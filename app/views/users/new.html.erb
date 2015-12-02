@@ -1,0 +1,35 @@
+<% provide(:title, '用户注册') %>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        注册新用户
+      </div>
+      <div class="panel-body">
+        <%= form_for(@user) do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+
+        <%= f.text_field :name, class: 'form-control', placeholder: '用户名' %>
+
+        <%= f.text_field :email, class: 'form-control', placeholder: '邮箱' %>
+
+        <!-- <%= f.label :sid, "学号" %>
+        <%= f.text_field :sid %>
+
+        <%= f.label :sclass, "班级" %>
+        <%= f.text_field :sclass %> -->
+
+        <%= f.password_field :password, class: 'form-control', placeholder: '密码' %>
+
+        <%= f.password_field :password_confirmation, class: 'form-control', placeholder: '确认密码' %>
+
+          <%= rucaptcha_input_tag(class: 'form-control', placeholder: '输入验证码') %>
+          <a class="rucaptcha-image-box" href="/signup">
+            <%= rucaptcha_image_tag(alt: 'Captcha') %>
+          </a>
+        <%= f.submit "注册", class: "button button-primary button-rounded" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

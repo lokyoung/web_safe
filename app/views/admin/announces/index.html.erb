@@ -1,0 +1,19 @@
+<div class="panel panel-default">
+  <div class="panel-heading">公告列表</div>
+  <table class="table">
+    <tr>
+      <td>标题</td>
+      <td>内容</td>
+      <td>发布者</td>
+    </tr>
+    <% @announces.each do |announce| %>
+      <tr>
+        <td><%= announce.title %></td>
+        <td><%= announce.content %></td>
+        <td><%= announce.user.name %></td>
+        <td><%= render 'admin/panel/edit_delete', obj: announce %></td>
+      </tr>
+    <% end %>
+  </table>
+  <%= paginate @announces %>
+</div>

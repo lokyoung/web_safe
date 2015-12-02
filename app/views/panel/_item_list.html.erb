@@ -1,0 +1,20 @@
+<ul class="list-group">
+  <% contents.each do |content|%>
+    <li class="list-group-item">
+    <%= user_avatar content.user %>
+    <%= link_to content.title, content  %>
+    <% if current_user == content.user %>
+      <span style="float: right">
+        <%= link_to send("edit_#{content.class.to_s.downcase}_path", content) do %>
+          <span class="glyphicon glyphicon-pencil"></span>
+        <% end %>
+        |
+        <%= link_to content, method: :delete, data: { confirm: "确定要删除么？" } do %>
+          <span class="glyphicon glyphicon-trash"></span>
+        <% end %>
+      </span>
+    <% end %>
+    </li>
+  <% end %>
+</ul>
+

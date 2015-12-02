@@ -1,0 +1,29 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="media-left">
+      <%= user_avatar @user %>
+    </div>
+    <div class="media-body">
+      用户名：<%= @user.name %><br/>
+      邮箱：<%= @user.email %><br/>
+      身份：<%= user_type @user.type %><br/>
+      <% if user_type(@user.type) == "学生" %>
+        班级：<%= @user.sclass %><br/>
+        学号：<%= @user.sid %><br/>
+      <% end %>
+    </div>
+    <div class="follow-info row">
+      <div class="col-sm-6">
+        <%= link_to "#{@user.followers.count}", '#', class: :counter, id: :followers %>
+        <a class="text" href="#">关注者</a>
+      </div>
+      <div class="col-sm-6">
+        <%= link_to "#{@user.following.count}", '#', class: :counter, id: :following %>
+        <a class="text" href="#">正在关注</a>
+      </div>
+    </div>
+    <div class="buttons row">
+      <%= render 'follow_form' %>
+    </div>
+  </div>
+</div>

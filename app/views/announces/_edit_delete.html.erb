@@ -1,0 +1,8 @@
+<% if current_user == @announce.user %>
+  <%= link_to edit_announce_path(@announce) do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+  <% end %> |
+  <%= link_to @announce, method: :delete, data: { confirm: '确定要删除么' } do %>
+    <span class="glyphicon glyphicon-trash"></span>
+  <% end %>
+<% end %>

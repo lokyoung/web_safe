@@ -1,0 +1,21 @@
+<div class="panel panel-default">
+  <div class="panel-heading">课件列表</div>
+  <table class="table">
+    <tr>
+      <td>标题</td>
+      <td>描述</td>
+      <td>附件</td>
+      <td>发布者</td>
+    </tr>
+    <% @coursewares.each do |courseware| %>
+      <tr>
+        <td><%= courseware.title %></td>
+        <td><%= courseware.description %></td>
+        <td><%= link_to '查看附件', courseware.coursefile.to_s %></td>
+        <td><%= courseware.user.name %></td>
+        <td><%= render 'admin/panel/edit_delete', obj: courseware %></td>
+      </tr>
+    <% end %>
+  </table>
+  <%= paginate @coursewares %>
+</div>

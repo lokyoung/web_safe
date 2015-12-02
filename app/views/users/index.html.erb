@@ -1,0 +1,27 @@
+<% provide(:title, '用户列表') %>
+<div class="row">
+  <div class="col-md-9">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        用户列表
+      </div>
+      <%= will_paginate %>
+      <ul class="list-group">
+        <% @users.each do |user|%>
+        <li class="list-group-item">
+          <%= link_to user.name, user %>
+          <% if current_user.teacher? && !current_user?(user) %>
+          <span style="float: right">
+            <%= link_to '删除用户', user, method: :delete, data: { confirm: "确定要删除么？" } %>
+          </span>
+          <% end %>
+        </li>
+        <% end %>
+      </ul>
+      <%= paginate @users %>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <%= render 'panel/user_info'%>
+  </div>
+</div>

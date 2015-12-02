@@ -1,0 +1,16 @@
+<% if @homework.stuclasses.include? current_user.stuclass %>
+<div class="panel panel-default">
+  <div class="panel-heading">提交作业</div>
+  <div class="panel-body">
+    <%= form_for([@homework, @stuhomework = Stuhomework.new], html: { multipart: true }) do |f| %>
+    <%= render "shared/error_messages", object: @stuhomework %>
+    <div class="form-group">
+      <%= f.file_field :stuhomeworkfile, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.submit "提交作业", class: "btn btn-primary" %>
+    </div>
+    <% end %>
+  </div>
+</div>
+<% end %>

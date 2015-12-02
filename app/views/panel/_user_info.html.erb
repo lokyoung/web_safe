@@ -1,0 +1,21 @@
+<div class="panel panel-default">
+  <div class="panel-body text-center">
+    <%= image_tag current_user.avatar_url, :width => 50 %><br/>
+    <h5><%= current_user.name %></h5>
+    <table class="table table-condensed">
+    <!-- <table class="table table-bordered"> -->
+    <tbody>
+      <tr>
+        <td>
+          <p><h3 class="text-primary"><strong><%= current_user.questions.count.to_i %></strong></h3></p>
+          <h6>发表问题</h6>
+        </td>
+        <td>
+          <p><h3 class="text-primary"><strong><%= current_user.answers.count.to_i %></strong></h3></p>
+          <h6>回答</h6>
+        </td>
+      </tr>
+    </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+<% provide(:title, "首页") %>
+<% if logged_in?%>
+  <div class="row">
+    <div class="col-md-9">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          公告
+        </div>
+        <%= render 'panel/item_list', contents: @announces %>
+      </div>
+      <%= paginate @announces %>
+      <% unless Courseware.nil? %>
+        <div class="panel panel-default">
+          <div class="panel-heading">最新视频</div>
+          <div class="panel-body">
+            <video width="800" src=<%= "#{Courseware.last.coursefile}" %> controls="controls"></video>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-md-3">
+      <%= render 'panel/user_info' %>
+      <% if teacher? %>
+        <%= render 'panel/new_item', content: 'announce', title: '新建公告' %>
+      <% end %>
+    </div>
+  </div>
+<% else %>
+  <div class="center jumbotron">
+    <h1>欢迎来到花椒网安</h1>
+    <p>花椒网安--志在为花椒网络安全技术课程服务</p>
+    <%= link_to '现在注册', signup_path, class: 'btn btn-lg btn-primary' %>
+  </div>
+<% end %>

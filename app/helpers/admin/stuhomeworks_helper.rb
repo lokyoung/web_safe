@@ -1,0 +1,2 @@
+module Admin::StuhomeworksHelper
+end

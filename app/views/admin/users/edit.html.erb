@@ -1,0 +1,24 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    用户信息修改
+  </div>
+  <div class="panel-body">
+    <%= form_for [:admin, @user] do |f| %>
+      <%= f.label :name, '用户名' %>
+      <%= f.text_field :name, class: 'form-control' %>
+      <%= f.label :email, '邮箱' %>
+      <%= f.text_field :email, class: 'form-control' %>
+      <%= f.label :type, '身份' %>
+      <select name="user[type]">
+        <option value ="Student">学生</option>
+        <option value ="Teacher">教师</option>
+        <option value="AdminUser">管理员</option>
+      </select>
+      <%= f.label :sid, '学号' %>
+      <%= f.text_field :sid, class: 'form-control' %>
+      <%= f.label :sclass, '班级' %>
+      <%= f.select :sclass, Stuclass.all.collect { |s| [ s.scname ] }, include_blank: true %>
+      <%= f.submit '保存修改', class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>

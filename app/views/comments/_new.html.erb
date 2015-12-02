@@ -1,0 +1,18 @@
+<%= form_for @comment= Comment.new do |f| %>
+  <%= render "shared/error_messages", object: @comment %>
+  <div class="form-group ui-widget">
+    <div>
+      <%= f.text_area :content, rows: 5, placeholder: '说点什么...', class: 'form-control', id: "tags" %>
+      <%= hidden_field_tag("#{item.class.to_s.downcase}_id", item.id.to_s) %>
+      <%= hidden_field_tag(:type, item.class.to_s) %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div>
+      <%= f.submit "评论", class: "button button-primary button-rounded", id: "submit"%>
+    </div>
+  </div>
+
+<% end %>
+

@@ -1,0 +1,16 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    公告修改
+  </div>
+  <div class="panel-body">
+    <%= form_for [:admin, @announce] do |f| %> 
+      <%= f.label :title, '标题' %>
+      <%= f.text_field :title, class: 'form-control' %>
+      <%= f.label :content, '内容' %>
+      <%= f.text_field :content, class: 'form-control' %>
+      <label>发布者</label>
+      <input class="form-control" type="text" readonly="value" value="<%= @announce.user.name %>">
+      <%= f.submit '保存修改', class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>

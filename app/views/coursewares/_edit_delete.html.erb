@@ -1,0 +1,8 @@
+<% if current_user == @courseware.user %>
+  <%= link_to edit_courseware_path(@courseware) do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+  <% end %> |
+  <%= link_to @courseware, method: :delete, data: { confirm: '确定要删除么' } do %>
+    <span class="glyphicon glyphicon-trash"></span>
+  <% end %>
+<% end %>

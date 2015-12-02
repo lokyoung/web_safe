@@ -1,0 +1,27 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    学生作业修改
+  </div>
+  <div class="panel-body">
+    <%= form_for [:admin, @homework, @stuhomework] do |f| %>
+      <label>用户名</label>
+      <input class="form-control" type="text" readonly="value" value="<%= @stuhomework.user.name %>">
+      <label>学号</label>
+      <input class="form-control" type="text" readonly="value" value="<%= @stuhomework.user.sid %>">
+      <label>班级</label>
+      <input class="form-control" type="text" readonly="value" value="<%= @stuhomework.user.sclass %>">
+      <%= f.label :stuhomeworkfile, '作业文件' %>
+      <%= f.file_field :stuhomeworkfile, class: 'form-control' %>
+      <%= f.label :ischecked, '是否批改' %>
+      <select name="stuhomework[ischecked]">
+        <option value="true">是</option>
+        <option value="false">否</option>
+      </select>
+      <%= f.label :mark, '分数' %>
+      <%= f.text_field :mark, class: 'form-control' %>
+      <%= f.label :remark, '评语' %>
+      <%= f.text_area :remark, class: 'form-control' %>
+      <%= f.submit '保存修改', class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>

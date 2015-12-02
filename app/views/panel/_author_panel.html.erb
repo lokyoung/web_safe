@@ -1,0 +1,20 @@
+  <div class="panel-heading" style="background-color:white">
+    <div class="media-body">
+      <h3>
+        <p class="text-left">
+        <strong><%= content.title %></strong>
+        </p>
+      </h3>
+      <p>
+      <h6>
+        <%= raw "作者<a href=#{user_path(content.user)}>#{content.user.name}</a>发表于#{content.created_at.to_formatted_s(:db)}" %>
+      </h6>
+      </p>
+    </div>
+    <div class="media-right">
+      <div style="margin-top: 10px">
+        <%= user_avatar content.user %>
+      </div>
+    </div>
+  </div>
+

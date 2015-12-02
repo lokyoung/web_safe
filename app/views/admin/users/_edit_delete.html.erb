@@ -1,0 +1,8 @@
+<%= link_to edit_admin_user_path user do %>
+  <span class="glyphicon glyphicon-pencil"></span>
+<% end %> |
+<% unless current_user == user %>
+<%= link_to admin_user, method: :delete, data: { confirm: '确定要删除么' } do %>
+  <span class="glyphicon glyphicon-trash"></span>
+<% end %>
+<% end %>

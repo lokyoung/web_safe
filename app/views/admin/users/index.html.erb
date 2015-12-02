@@ -1,0 +1,28 @@
+<div class="panel panel-default">
+  <div class="panel-heading">用户列表</div>
+  <table class="table">
+    <tr>
+      <td>用户名</td>
+      <td>邮箱</td>
+      <td>身份</td>
+      <td>学号</td>
+      <td>班级</td>
+    </tr>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= user_type user.type %></td>
+        <td><%= user.sid %></td>
+        <td><%= user.sclass %></td>
+        <td><%= link_to edit_admin_user_path(user) do %>
+          <span class="glyphicon glyphicon-pencil"></span>
+        <% end %> |
+        <%= link_to admin_user_path(user), method: :delete, data: { confirm: '确定要删除么' } do %>
+          <span class="glyphicon glyphicon-trash"></span>
+        <% end %></td>
+    </tr>
+  <% end %>
+  <%= paginate @users %>
+</table>
+</div>

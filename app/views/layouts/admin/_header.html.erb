@@ -1,0 +1,30 @@
+<header class="navbar navbar-fixed-top navbar-default">
+<div class="container">
+  <%= link_to "花椒网安", admin_root_path, id: "logo"  %>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+      <li>
+      <%= link_to root_path do %>
+        <span class="glyphicon glyphicon-home">首页</span>
+      <% end %>
+      </li>
+    </ul>
+    <nav>
+    <ul class="nav navbar-nav pull-right">
+      </li>
+      <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        <%= current_user.name %>
+        <b class="caret"></b>
+      </a>
+      <ul class="dropdown-menu">
+        <li><%= link_to '个人资料', current_user %></li>
+        <li><%= link_to '设置', edit_user_path(current_user) %></li>
+        <li class="divider"></li>
+        <li><%= link_to '安全退出', logout_path, method: "delete" %></li>
+      </ul>
+      </li>
+    </ul>
+    </nav>
+  </div>
+  </header>
