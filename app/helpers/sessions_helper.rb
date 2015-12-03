@@ -56,8 +56,16 @@ module SessionsHelper
     session.delete(:forward_url)
   end
 
+  def teacher_admin?
+    current_user.type == "Teacher" || current_user.type == "AdminUser"
+  end
+
   def teacher?
     current_user.type == "Teacher"
+  end
+
+  def admin?
+    current_user.type == "AdminUser"
   end
 
   def isteacher?(user)

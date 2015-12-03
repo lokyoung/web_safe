@@ -17,7 +17,7 @@
         <td><%= stuhomework.user.sclass %></td>
         <td><%= stuhomework.ischecked %></td>
         <td><%= stuhomework.mark %></td>
-        <% if teacher? %>
+        <% if teacher_admin? %>
           <td><a href="#{<%= stuhomework.stuhomeworkfile %>}">下载作业</a></td>
           <td><%= link_to '评分', check_homework_stuhomework_path(@homework, stuhomework) %></td>
         <% end %>

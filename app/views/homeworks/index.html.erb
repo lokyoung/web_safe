@@ -11,7 +11,7 @@
   </div>
   <div class="col-md-3">
     <%= render 'panel/user_info' %>
-    <% if teacher? %>
+    <% if teacher_admin? %>
       <%= render 'panel/new_item', content: 'homework', title: '布置作业' %>
     <% end %>
   </div>

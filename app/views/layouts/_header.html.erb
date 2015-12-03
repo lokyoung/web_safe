@@ -31,7 +31,7 @@
             <li class="divider"></li>
             <li><%= link_to '我的作业', stu_home_path %></li>
           <% end %>
-          <% if teacher? %>
+          <% if teacher_admin? %>
             <li class="divider"></li>
             <li><%= link_to '教学班级管理', stuclasses_path %></li>
           <% end %>

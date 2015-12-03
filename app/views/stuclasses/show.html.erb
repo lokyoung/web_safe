@@ -10,12 +10,14 @@
       <td>用户名</td>
       <td>学号</td>
       <td>Email</td>
+      <td></td>
     </tr>
     <% @stuclass.students.each do |student| %>
     <tr>
       <td><%= link_to student.name, user_path(student) %></td>
       <td><%= student.sid %></td>
       <td><%= student.email %></td>
+      <td><%= link_to '成绩管理', get_stuhomeworks_user_path(student) %></td>
     </tr>
     <% end %>
   </table>

@@ -9,7 +9,7 @@
         <%= render 'panel/item_list', contents: @announces %>
       </div>
       <%= paginate @announces %>
-      <% unless Courseware.nil? %>
+      <% unless Courseware.last.nil? %>
         <div class="panel panel-default">
           <div class="panel-heading">最新视频</div>
           <div class="panel-body">
@@ -20,7 +20,7 @@
     </div>
     <div class="col-md-3">
       <%= render 'panel/user_info' %>
-      <% if teacher? %>
+      <% if teacher_admin? %>
         <%= render 'panel/new_item', content: 'announce', title: '新建公告' %>
       <% end %>
     </div>

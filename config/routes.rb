@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :users do
     member do
       get :following, :followers
+      get :get_stuhomeworks
     end
   end
   # 访问登录页面
@@ -32,6 +33,7 @@ Rails.application.routes.draw do
     resources :stuhomeworks do
       member do
         get :check
+        get :get_stuhomeworks
         patch :check_complete
       end
     end

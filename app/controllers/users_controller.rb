@@ -77,6 +77,12 @@ class UsersController < ApplicationController
     render 'show_follow'
   end
 
+  def get_stuhomeworks
+    @student = User.find params[:id]
+    @stuhomeworks = @student.stuhomeworks.page params[:page]
+    @homeworks = @student.stuclass.homeworks.page params[:page]
+  end
+
   private
     def user_params
       # 需要传入的params哈希参数包含:user元素，只允许传入name, email, passoword, password_confirmation属性

@@ -7,12 +7,17 @@
       </div>
       <ul class="list-group">
         <% @stuclasses.each do |stuclass| %>
-        <li class="list-group-item">
+          <li class="list-group-item">
           <%= link_to stuclass.scname, stuclass %>
           <span style="float: right">
-            <%= link_to '删除', stuclass, method: :delete, data: { confirm: "确定要删除么？" } %>
+              <%= link_to edit_stuclass_path(stuclass) do %>
+                <span class="glyphicon glyphicon-pencil"></span>
+              <% end %> |
+              <%= link_to stuclass, method: :delete, data: { confirm: '确定要删除么' } do %>
+                <span class="glyphicon glyphicon-trash"></span>
+              <% end %>
           </span>
-        </li>
+          </li>
         <% end %>
       </ul>
     </div>
@@ -20,8 +25,8 @@
   </div>
   <div class="col-md-3">
     <%= render 'panel/user_info' %>
-    <% if teacher? %>
-    <%= render 'panel/new_stuclass' %>
+    <% if teacher_admin? %>
+      <%= render 'panel/new_stuclass' %>
     <% end %>
   </div>
 </div>

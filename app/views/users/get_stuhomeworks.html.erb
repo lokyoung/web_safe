@@ -1,0 +1,41 @@
+<% provide(:title, "#{@student.name}的成绩") %>
+<div class="row">
+  <div class="col-md-9">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <%= @student.name %>
+      </div>
+      <table class="table table-striped">
+        <tr>
+          <td>作业标题</td>
+          <td>是否提交</td>
+          <td>是否批改</td>
+          <td>分数</td>
+          <td>评语</td>
+        </tr>
+        <% @homeworks.each do |homework| %>
+          <tr>
+            <td><%= homework.title %></td>
+            <% if @stuhomeworks.where(homework_id: homework.id).first.nil? %>
+              <td>否</td>
+              <td></td>
+              <td></td>
+              <td></td>
+            <% else %>
+              <% stuhomework = @stuhomeworks.where(homework_id: homework.id).first %>
+              <td>是</td>
+              <td><%= stuhomework.ischecked %></td>
+              <td><%= stuhomework.mark %></td>
+              <td><%= stuhomework.remark %></td>
+              <td><%= link_to '评分', check_homework_stuhomework_path(homework, stuhomework) %></td>
+            <% end %>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <%= render 'panel/user_info' %>
+    </div>
+  </div>
+
