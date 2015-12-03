@@ -1,4 +1,8 @@
-source 'https://rubygems.org' # Bundle edge Rails instead: gem 'rails', github: 'rails/rails' gem 'rails', '4.2.5' gem 'actioncable', github: 'rails/actioncable' gem 'pg'
+source 'https://rubygems.org'
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '4.2.5'
+gem 'actioncable', github: 'rails/actioncable'
+gem 'pg'
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3'
 # Use SCSS for stylesheets
@@ -51,7 +55,11 @@ group :development, :test do
   gem 'better_errors'
 end
 
-
+group :test do
+  gem 'minitest-reporters'
+  gem 'mini_backtrace'
+  gem 'guard-minitest'
+end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
