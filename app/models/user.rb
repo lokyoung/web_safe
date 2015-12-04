@@ -30,9 +30,10 @@ class User < ActiveRecord::Base
   before_save { self.email = email.downcase }
   # 方法最后一个参数为哈希，花括号可以省略
   # validates :name, { presence: true }
-  validates :name, presence: true, length: { maximum: 20 }
+  validates :name, presence: true, length: { maximum: 20 },
+                   uniqueness: true
   VALID_EMAIL_FORMAT = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, presence: true, length: { maximum: 30 },
+  validates :email, presence: true, length: { maximum: 100 },
                     format: { with: VALID_EMAIL_FORMAT },
                     uniqueness: { case_sensitive: false }
   has_secure_password
