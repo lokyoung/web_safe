@@ -12,9 +12,9 @@ class ApplicationController < ActionController::Base
 
   # 删除文件
   #def file_delete name
-    #if File.exist? name
-      #File.delete name
-    #end
+  #if File.exist? name
+  #File.delete name
+  #end
   #end
 
   def file_delete name
@@ -27,6 +27,13 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def teacher_admin_user
+    unless teacher_admin?
+      flash[:danger] = '权限不够，无法操作'
+      redirect_to root_url
+    end
+  end
+
   def teacher_user
     redirect_to(root_url) unless teacher?
   end
@@ -38,4 +45,45 @@ class ApplicationController < ActionController::Base
       redirect_to login_url
     end
   end
+
+  def correct_user user
+    unless (current_user == user)|| admin?
+      flash[:warning] = '请不要尝试修改他人的内容'
+      redirect_to root_url
+    end
+  end
+
+  def self.normal_item(*args)
+    if args.include? :index
+      define_method(:index){
+        items = params[:controller]
+        self.class.send(:attr_accessor, items)
+        self.send( "#{item}=", items.singularize.capitalize.constantize.page(params[:page]))
+      }
+    end
+    if args.include? :new
+      define_method(:new){
+        item = params[:controller].singularize
+        self.class.send(:attr_accessor, item)
+        self.send("#{item}=", item.capitalize.constantize.new)
+      }
+    end
+
+    if args.include? :show
+      define_method(:show){
+        item = params[:controller].singularize
+        self.class.send(:attr_accessor, item)
+        self.send(item + "=", item.capitalize.constantize.find(params[:id]))
+      }
+    end
+
+    if args.include? :edit
+      define_method(:edit){
+        item = params[:controller].singularize
+        self.class.send(:attr_accessor, item)
+        self.send(item + "=", item.capitalize.constantize.find(params[:id]))
+      }
+    end
+  end
+
 end

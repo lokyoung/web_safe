@@ -74,4 +74,13 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.valid?
   end
 
+  # 用户删除之后对应的公告也被删除
+  test "user delete so does his annouces" do
+    @user.save
+    @user.announces.create!(title: "Title", content: "Haha")
+    assert_difference "Announce.count", -1 do
+      @user.destroy
+    end
+  end
+
 end

@@ -6,4 +6,5 @@ class Answer < ActiveRecord::Base
   validates :user_id, presence: true
   validates :question_id, presence: true
   validates :content, presence: true
+  default_scope -> { order(created_at: :desc) }
 end

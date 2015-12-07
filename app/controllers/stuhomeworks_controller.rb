@@ -41,6 +41,13 @@ class StuhomeworksController < ApplicationController
     end
   end
 
+  def destroy
+    @homework = Homework.find params[:homework_id]
+    Stuhomework.find(params[:id]).destroy
+    flash[:success] = '作业已删除'
+    redirect_to @homework
+  end
+
   def check
     @homework = Homework.find(params[:homework_id])
     @stuhomework = Stuhomework.find(params[:id])

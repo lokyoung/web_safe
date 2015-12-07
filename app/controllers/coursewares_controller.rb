@@ -1,5 +1,7 @@
 class CoursewaresController < ApplicationController
   before_action :logged_in_user
+  before_action :teacher_admin_user, only: [:new, :create, :update, :destroy]
+
   def index
     @coursewares = Courseware.page params[:page]
   end

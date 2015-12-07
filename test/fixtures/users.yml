@@ -1,0 +1,4 @@
+example:
+  name: example
+  email: example@qq.com
+  password_digest: <%= User.digest('123456') %>

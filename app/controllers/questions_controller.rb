@@ -1,5 +1,9 @@
 class QuestionsController < ApplicationController
   before_action :logged_in_user
+  before_action only: [:edit, :update] do
+    @question = Question.find(params[:id])
+    correct_user @question.user
+  end
 
   def index
     # 根据分页显示问题
@@ -52,4 +56,5 @@ class QuestionsController < ApplicationController
     def update_params
       params.require(:question).permit(:title, :content, :issolved)
     end
+
 end

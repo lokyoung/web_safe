@@ -1,3 +1,7 @@
+<div class="panel panel-default">
+<div class="panel-heading">
+  <%= title %>
+</div>
 <ul class="list-group">
   <% contents.each do |content|%>
     <li class="list-group-item">
@@ -16,5 +20,5 @@
     <% end %>
     </li>
   <% end %>
-</ul>
-
+</ul> <%= paginate contents %>
+</div>

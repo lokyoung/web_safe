@@ -2,13 +2,7 @@
 <% if logged_in?%>
   <div class="row">
     <div class="col-md-9">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          公告
-        </div>
-        <%= render 'panel/item_list', contents: @announces %>
-      </div>
-      <%= paginate @announces %>
+      <%= render 'panel/item_list', contents: @announces, title: '公告列表' %>
       <% unless Courseware.last.nil? %>
         <div class="panel panel-default">
           <div class="panel-heading">最新视频</div>

@@ -1,11 +1,14 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:edit, :update, :index, :destroy, :following, :follwers]
-  before_action :correct_user, only: [:edit, :update]
-  before_action :teacher_user, only: :destroy
+  before_action only: [:edit, :update] do
+    @user = User.find(params[:id])
+    correct_user @user
+  end
+  before_action :teacher_admin_user, only: :destroy
+
+  #normal_item :new, :show, :index, :edit
 
   def index
-    # @users = User.all
-    # 根据分页显示用户
     @users = User.page params[:page]
   end
 
@@ -15,8 +18,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    # 在Rails服务器中像控制台一样操作
-    # debugger
   end
 
   def create
@@ -84,29 +85,29 @@ class UsersController < ApplicationController
   end
 
   private
-    def user_params
-      # 需要传入的params哈希参数包含:user元素，只允许传入name, email, passoword, password_confirmation属性
-      # 如果没有指定:user会抛出异常
-      params.require(:user).permit(:name, :email, :password, :password_confirmation, :sid, :sclass)
-    end
+  def user_params
+    # 需要传入的params哈希参数包含:user元素，只允许传入name, email, passoword, password_confirmation属性
+    # 如果没有指定:user会抛出异常
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :sid, :sclass)
+  end
 
-    # 确保用户已经登录
-    def logged_in_user
-      unless logged_in?
-        store_location
-        flash[:danger] = "请先登录"
-        redirect_to login_url
-      end
+  # 确保用户已经登录
+  def logged_in_user
+    unless logged_in?
+      store_location
+      flash[:danger] = "请先登录"
+      redirect_to login_url
     end
+  end
 
-    # 确保是正确的用户
-    def correct_user
-      @user = User.find(params[:id])
-      redirect_to(root_url) unless current_user?(@user)
-    end
+  # 确保是正确的用户
+  #def correct_user
+  #@user = User.find(params[:id])
+  #redirect_to(root_url) unless current_user?(@user)
+  #end
 
-    # 确保当前用户是教师
-    # def teacher_user
-    #   redirect_to(root_ur) unless current_user.teacher?
-    # end
+  # 确保当前用户是教师
+  # def teacher_user
+  #   redirect_to(root_ur) unless current_user.teacher?
+  # end
 end

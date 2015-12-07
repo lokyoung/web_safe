@@ -47,6 +47,8 @@ gem 'kaminari'
 gem 'rucaptcha'
 # 使用puma服务器
 gem 'puma'
+# 产生数据以供测试使用
+gem 'faker'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

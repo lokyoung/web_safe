@@ -1,14 +1,8 @@
 <% provide(:title, '自由讨论') %>
 <div class="row">
   <div class="col-md-9">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        话题列表
-      </div>
-      <%= render 'panel/item_list', contents: @topics %>
-    </div>
-    <%= paginate @topics %>
-  </div>
+    <%= render 'panel/item_list', contents: @topics, title: '话题列表' %>
+‘  </div>
   <div class="col-md-3">
     <%= render 'panel/user_info' %>
     <%= render 'panel/new_item', content: 'topic', title: '新增话题'  %>

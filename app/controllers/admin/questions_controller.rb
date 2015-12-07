@@ -10,7 +10,7 @@ class Admin::QuestionsController < Admin::AdminController
   def update
     @question = Question.find(params[:id])
     if @question.update_attributes(question_params)
-      flash[:success] = '话题修改成功'
+      flash[:success] = '问题修改成功'
       redirect_to admin_questions_url
     else
       render 'edit'
@@ -19,7 +19,7 @@ class Admin::QuestionsController < Admin::AdminController
 
   def destroy
     Question.find(params[:id]).destroy
-    flash[:success] = '话题删除成功'
+    flash[:success] = '问题删除成功'
     redirect_to admin_questions_url
   end
 

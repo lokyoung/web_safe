@@ -1,13 +1,7 @@
 <% provide(:title, '作业') %>
 <div class="row">
   <div class="col-md-9">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        作业列表
-      </div>
-      <%= render 'panel/item_list', contents: @homeworks %>
-    </div>
-    <%= paginate @homeworks %>
+    <%= render 'panel/item_list', contents: @homeworks, title: '作业列表' %>
   </div>
   <div class="col-md-3">
     <%= render 'panel/user_info' %>

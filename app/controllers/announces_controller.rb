@@ -1,5 +1,5 @@
 class AnnouncesController < ApplicationController
-  before_action :teacher_user, only: [:create, :destroy, :edit, :update]
+  before_action :teacher_admin_user, only: [:new, :create, :destroy, :edit, :update]
 
   def index
     @announces = Announce.page params[:page]
@@ -14,7 +14,7 @@ class AnnouncesController < ApplicationController
     if @announce.save
       flash[:success] = '发布公告成功！'
       current_user.followers.each do |user|
-        notification = Notification.create(user_id: user.id, title: "你关注的用户<a href=#{user_url(current_user)}>#{current_user.name}</a>发布新课件", content: "<a href=#{announce_url(@announce)}>#{@announce.title}</a>", unread: true)
+        Notification.create(user_id: user.id, title: "你关注的用户<a href=#{user_url(current_user)}>#{current_user.name}</a>发布新课件", content: "<a href=#{announce_url(@announce)}>#{@announce.title}</a>", unread: true)
         ActionCable.server.broadcast "user:#{user.id}", { body: user.notifications.unread.count.to_s }
       end
       redirect_to root_url
