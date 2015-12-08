@@ -45,18 +45,18 @@ class UserLoginTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_url
   end
 
-  #test "user edit test" do
-    #log_in_as @user
-    #get edit_user_path @user
-    #assert_response :success
-    #name = "new name"
-    #email = "123@qq.com"
-    #patch user_path(@user), user: { name: name,
-                                    #email: email,
-                                    #password: "123456",
-                                    #password_confirmation: "123456" }
-    #assert_redirected_to @user
-    ##@user.reload
-    ##assert_equal @user.name, name
-  #end
+  test "user edit test" do
+    log_in_as @user
+    get edit_user_path @user
+    assert_response :success
+    name = "new name"
+    email = "123@qq.com"
+    patch user_path(@user), user: { name: name,
+                                    email: email,
+                                    password: "123456",
+                                    password_confirmation: "123456" }
+    assert_redirected_to @user
+    @user.reload
+    assert_equal @user.name, name
+  end
 end

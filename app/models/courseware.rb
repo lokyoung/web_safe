@@ -1,6 +1,5 @@
 class Courseware < ActiveRecord::Base
   belongs_to :user
   mount_uploader :coursefile, CourseFileUploader
-  validates :title, presence: true
-  validates :description, presence: true
+  validates_presence_of :title, :description, :coursefile
 end

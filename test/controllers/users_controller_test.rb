@@ -2,7 +2,9 @@ require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
   def setup
-    @user = users(:user_1)
+    @user1 = users(:user_1)
+    @user2 = users(:teacher1)
+    @user3 = users(:admin1)
   end
 
   test "get user new" do
@@ -10,10 +12,44 @@ class UsersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "user edit" do
-    log_in_as @user
+  test "user edit their own profile" do
+    log_in_as @user1
+    get :edit, id: @user1.id
     assert_response :success
-    patch :update, id: @user.id, user: { name: 'aha' }
-    assert_redirected_to @user
+    patch :update, id: @user1.id, user: { name: 'aha' }
+    assert_redirected_to @user1
   end
+
+  test "user edit fail" do
+    log_in_as @user1
+    get :edit, id: @user1.id
+    assert_response :success
+    patch :update, id: @user1.id, user: { name: "" }
+    assert_template 'users/edit'
+  end
+
+  test "normal user can't edit other user" do
+    log_in_as @user1
+    get :edit, id: @user2.id
+    assert_redirected_to root_url
+    patch :update, id: @user2.id, user: { name: "aha" }
+    assert_redirected_to root_url
+  end
+
+  test "teacher user can't edit other user" do
+    log_in_as @user2
+    get :edit, id: @user1.id
+    assert_redirected_to root_url
+    patch :update, id: @user1.id, user: { name: "aha" }
+    assert_redirected_to root_url
+  end
+
+  test "admin user can edit other user" do
+    log_in_as @user3
+    get :edit, id: @user2.id
+    assert_response :success
+    patch :update, id: @user2.id, user: { name: "aha" }
+    assert_redirected_to @user2
+  end
+
 end

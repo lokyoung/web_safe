@@ -39,7 +39,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    unless params[:user][:sclass] == ""
+    if params[:user][:sclass].present?
       # stuclass = Stuclass.where(scname: params[:user][:sclass])
       # stuclass << @user
       @user.stuclass_id = Stuclass.find_by(scname: params[:user][:sclass]).id
