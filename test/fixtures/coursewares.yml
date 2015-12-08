@@ -1,0 +1,5 @@
+courseware_a:
+  id: 1
+  title: "Test"
+  description: "des"
+  coursefile: "courseware"

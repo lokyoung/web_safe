@@ -19,7 +19,7 @@ class UserLoginTest < ActionDispatch::IntegrationTest
   test "valid login and logout" do
     get login_path
     assert_template 'sessions/new'
-    post login_path, session: { email: @user.email, password: '123456' }
+    post login_path, session: { email: @user.email, password: 'password' }
     assert is_logged_in?
     # 检查重定向地址是否正确
     assert_redirected_to root_url
@@ -38,4 +38,25 @@ class UserLoginTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", login_path, count: 1
     assert_select "a[href=?]", logout_path, count: 0
   end
+
+  test "user can't edit other user's profile" do
+    log_in_as @user
+    get edit_user_path users(:teacher1)
+    assert_redirected_to root_url
+  end
+
+  #test "user edit test" do
+    #log_in_as @user
+    #get edit_user_path @user
+    #assert_response :success
+    #name = "new name"
+    #email = "123@qq.com"
+    #patch user_path(@user), user: { name: name,
+                                    #email: email,
+                                    #password: "123456",
+                                    #password_confirmation: "123456" }
+    #assert_redirected_to @user
+    ##@user.reload
+    ##assert_equal @user.name, name
+  #end
 end

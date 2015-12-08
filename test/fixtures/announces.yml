@@ -16,6 +16,7 @@ announce_c:
 # 产生测试数据
 <% 50.times do |n| %>
 announce_<%= n %>:
+  id: <%= n %>
   title: <%= Faker::Lorem.sentence(10) %>
   created_at: <%= 15.minutes.ago %>
   user: example

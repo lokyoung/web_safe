@@ -1,4 +1,27 @@
 example:
   name: example
   email: example@qq.com
-  password_digest: <%= User.digest('123456') %>
+  password_digest: <%= User.digest('password') %>
+  type: Student
+
+teacher1:
+  name: lcy
+  email: lcy@qq.com
+  password_digest: <%= User.digest('password') %>
+  type: Teacher
+
+admin1:
+  name: lok
+  email: lok@qq.com
+  password_digest: <%= User.digest('password') %>
+  type: AdminUser
+
+# 产生测试数据
+<% 50.times do |n| %>
+user_<%= n %>:
+  id: <%= n %>
+  name: <%= Faker::Lorem.sentence(1) %>
+  email: <%= "#{n}@qq.com" %>
+  password_digest: <%= User.digest('password') %>
+  type: Student
+<% end %>

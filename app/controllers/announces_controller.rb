@@ -1,4 +1,5 @@
 class AnnouncesController < ApplicationController
+  before_action :logged_in_user, only: [:create, :destroy, :new, :edit, :update, :show]
   before_action :teacher_admin_user, only: [:new, :create, :destroy, :edit, :update]
 
   def index
