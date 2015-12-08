@@ -17,11 +17,6 @@
             [未解决]
           <% end %>
           <%= link_to question.title, question %>
-          <!-- <% if current_user.teacher?%>
-          <span style="float: right">
-            <%= link_to '删除问题', question, method: :delete, data: { confirm: "确定要删除么？" } %>
-          </span>
-        <% end %> -->
         </li>
       <% end %>
     </ul>

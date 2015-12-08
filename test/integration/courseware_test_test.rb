@@ -4,14 +4,27 @@ class CoursewareTestTest < ActionDispatch::IntegrationTest
   include ApplicationHelper
 
   def setup
-    @user = users(:example)
-    @courseware = coursewares(:courseware_a)
+    @user1 = users(:example)
+    @user2 = users(:teacher1)
+    #@courseware = Courseware.create user_id: @user2.id, title: "test", description: "ok", coursefile: Rack::Test::UploadedFile.new('./test/file/test.txt')
   end
 
   test "can't see unless log_in" do
     get coursewares_path
     assert_response :redirect
   end
+
+  #test "edit courseware" do
+    #log_in_as @user2
+    #get edit_courseware_path(@courseware)
+    #assert_response :success
+    #title = 'update title'
+    #description = 'update description'
+    #coursefile = Rack::Test::UploadedFile.new('./test/file/test_1.txt')
+    #patch courseware_path(@courseware), courseware: { title: title,
+                                                      #description: description,
+                                                      #coursefile: coursefile }
+  #end
 
   #test "courseware list" do
     #log_in_as @user

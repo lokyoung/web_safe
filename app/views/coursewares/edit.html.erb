@@ -1,0 +1,15 @@
+<%= form_for(@courseware, html: { multipart: true }) do |f| %>
+<%= render "shared/error_messages", object: @courseware %>
+<div class="form-group">
+  <%= f.text_field :title, class: "form-control", placeholder: "在这里填写标题" %>
+</div>
+<div class="form-group">
+  <%= f.text_area :description, class: "form-control", rows: 20, placeholder: "在这里填写课件描述" %>
+</div>
+<div class="form-group">
+    <%= f.file_field :coursefile, class: "form-control" %>
+</div>
+<div class="form-group">
+  <%= f.submit "修改课件", class: "btn btn-primary" %>
+</div>
+<% end %>

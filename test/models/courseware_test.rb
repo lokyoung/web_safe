@@ -2,11 +2,10 @@ require 'test_helper'
 
 class CoursewareTest < ActiveSupport::TestCase
   def setup
-    @courseware = coursewares(:courseware_a)
+    @courseware = Courseware.new title: "test", description: "ok", coursefile: Rack::Test::UploadedFile.new('./test/file/test.txt')
   end
 
   test "valid" do
-    binding.pry
     assert @courseware.valid?
   end
 
@@ -15,8 +14,12 @@ class CoursewareTest < ActiveSupport::TestCase
     assert_not @courseware.valid?
   end
 
-  test "file empty" do
-    @courseware.coursefile = ""
+  test "description empty" do
+    @courseware.description = ""
     assert_not @courseware.valid?
+  end
+
+  test "file empty" do
+    assert_not coursewares(:courseware_a).valid?
   end
 end

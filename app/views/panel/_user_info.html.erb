@@ -1,3 +1,4 @@
+<% if current_user.present? %>
 <div class="panel panel-default">
   <div class="panel-body text-center">
     <%= image_tag current_user.avatar_url, :width => 50 %><br/>
@@ -19,3 +20,4 @@
     </table>
   </div>
 </div>
+<% end %>

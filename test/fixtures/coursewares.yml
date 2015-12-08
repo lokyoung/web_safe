@@ -1,6 +1,5 @@
 courseware_a:
-  id: 1
+  id: 10
   user_id: 1
   title: "Test"
   description: "des"
-  coursefile: "courseware"

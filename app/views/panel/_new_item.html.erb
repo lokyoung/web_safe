@@ -1,3 +1,4 @@
+<% if current_user.present? %>
 <div class="panel panel-default">
   <div class="panel-body text-center">
     <%= link_to send("new_#{content}_path"), class: 'btn btn-success' do%>
@@ -5,3 +6,4 @@
   <% end %>
 </div>
 </div>
+<% end %>

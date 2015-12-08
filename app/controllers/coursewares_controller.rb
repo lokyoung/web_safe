@@ -1,6 +1,10 @@
 class CoursewaresController < ApplicationController
   before_action :logged_in_user
   before_action :teacher_admin_user, only: [:new, :create, :edit, :update, :destroy]
+  before_action only: [:edit, :update] do
+    @courseware = Courseware.find params[:id]
+    correct_user @courseware.user
+  end
 
   def index
     @coursewares = Courseware.page params[:page]
@@ -11,7 +15,7 @@ class CoursewaresController < ApplicationController
   end
 
   def create
-    @courseware = current_user.coursewares.new(couresware_params)
+    @courseware = current_user.coursewares.new(courseware_params)
     if @courseware.save
       flash[:success] = '上传课件成功'
       current_user.followers.each do |user|
@@ -31,11 +35,15 @@ class CoursewaresController < ApplicationController
     end
   end
 
+  def edit
+    @courseware = Courseware.find params[:id]
+  end
+
   def update
     @courseware = Courseware.find params[:id]
     if @courseware.update_attributes courseware_params
       flash[:success] = '课件资料修改成功'
-      redirect_to admin_coursewares_url
+      redirect_to coursewares_url
     else
       render 'edit'
     end
@@ -51,7 +59,7 @@ class CoursewaresController < ApplicationController
   end
 
   private
-  def couresware_params
+  def courseware_params
     params.require(:courseware).permit(:title, :description, :coursefile)
   end
 
