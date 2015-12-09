@@ -1,0 +1,11 @@
+answer_1:
+  id: 1
+  content: "hahahha"
+  user_id: 1
+  question_id: 1
+
+answer_2:
+  id: 2
+  content: "user 2"
+  user_id: 2
+  question_id: 1

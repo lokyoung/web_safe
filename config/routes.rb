@@ -22,8 +22,9 @@ Rails.application.routes.draw do
   resources :announces
   # 问题和回答
   resources :questions do
-    resources :answers
+    resources :answers, only: [:create]
   end
+  resources :answers, only: [:edit, :update, :destroy]
 
   # 课件
   resources :coursewares

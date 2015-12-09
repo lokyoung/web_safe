@@ -10,7 +10,17 @@
           <%= user_avatar answer.user %>
         </div>
         <div class="infos">
-          <%= link_to answer.user.name, answer.user%>
+          <% if current_user == answer.user %>
+            <span style="float: right">
+            <%= link_to edit_answer_path answer do %>
+              <span class="glyphicon glyphicon-pencil"></span>
+            <% end %> |
+            <%= link_to answer_path(answer), method: :delete, data: { confirm: '确定要删除么' } do %>
+              <span class="glyphicon glyphicon-trash"></span>
+            <% end %>
+          </span>
+          <% end %>
+          <%= link_to answer.user.name, answer.user %>
           <small><%= time_ago_in_words answer.created_at %> ago</small>
           <p><%= answer.content %></p>
           <div class="post-comment">

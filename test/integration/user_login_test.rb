@@ -59,4 +59,13 @@ class UserLoginTest < ActionDispatch::IntegrationTest
     @user.reload
     assert_equal @user.name, name
   end
+
+  #test "user index do " do
+    #log_in_as @user
+    #get users_path
+    #assert_template 'users/index'
+    #User.page(page: 1).each do |user|
+      #assert_select 'a[href=?]', user_path(user), text: user.name
+    #end
+  #end
 end

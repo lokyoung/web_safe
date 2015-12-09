@@ -7,10 +7,10 @@ class StuHomeWorkUploader < CarrierWave::Uploader::Base
   # include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
-  storage :file
+  #storage :file
   # storage :fog
-  
-  CarrierWave::SanitizedFile.sanitize_regexp = /[^[:word:]\.\-\+]/
+
+  #CarrierWave::SanitizedFile.sanitize_regexp = /[^[:word:]\.\-\+]/
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir

@@ -4,5 +4,4 @@ class Announce < ActiveRecord::Base
   validates :user_id, presence: true
   validates :title, presence: true
   validates :content, presence: true
-  paginates_per 15
 end

@@ -1,10 +1,8 @@
 class AnswersController < ApplicationController
-  before_action :logged_in
-  
-  def index
-  end
-
-  def new
+  before_action :logged_in_user, only: [:create, :edit, :update, :destroy]
+  before_action only: [:edit, :update, :destroy] do
+    @answer = Answer.find params[:id]
+    correct_user @answer.user
   end
 
   def create
@@ -25,6 +23,27 @@ class AnswersController < ApplicationController
       flash[:danger] = '答案不可为空'
       redirect_to @question
     end
+  end
+
+  def edit
+    @answer = Answer.find(params[:id])
+  end
+
+  def update
+    @answer = Answer.find(params[:id])
+    if @answer.update_attributes(answer_params)
+      flash[:success] = '答案修改成功'
+      redirect_to question_url @answer.question
+    else
+      render 'edit'
+    end
+  end
+
+  def destroy
+    question = Answer.find(params[:id]).question
+    Answer.find(params[:id]).destroy
+    flash[:success] = '答案删除成功'
+    redirect_to question_url question
   end
 
   private

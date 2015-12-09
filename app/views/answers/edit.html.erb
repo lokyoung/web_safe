@@ -1,0 +1,14 @@
+<%= provide(:title, '修改答案') %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    修改答案
+  </div>
+  <div class="panel-body">
+    <%= form_for @answer do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+      <%= f.label :content, '答案内容' %>
+      <%= f.text_area :content, class: "form-control" %>
+      <%= f.submit "修改", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
