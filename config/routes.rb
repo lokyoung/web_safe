@@ -31,12 +31,14 @@ Rails.application.routes.draw do
 
   # 作业
   resources :homeworks do
-    resources :stuhomeworks do
-      member do
-        get :check
-        get :get_stuhomeworks
-        patch :check_complete
-      end
+    resources :stuhomeworks, only: [:create]
+  end
+
+  resources :stuhomeworks, only: [:edit, :update, :destroy] do
+    member do
+      get :check
+      get :get_stuhomeworks
+      patch :check_complete
     end
   end
 
@@ -54,7 +56,7 @@ Rails.application.routes.draw do
   mount RuCaptcha::Engine => "/rucaptcha"
 
   # 评论
-  resources :comments, only: [:create, :destory]
+  resources :comments, only: [:create, :edit, :update, :destroy]
 
   # 讨论话题
   resources :topics

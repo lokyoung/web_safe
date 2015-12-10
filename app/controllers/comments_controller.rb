@@ -1,6 +1,8 @@
 class CommentsController < ApplicationController
-  def index
-
+  before_action :logged_in_user
+  before_action only: [:edit, :update, :destroy] do
+    @comment = Comment.find params[:id]
+    correct_user @comment.user
   end
 
   def create
@@ -14,6 +16,31 @@ class CommentsController < ApplicationController
       flash[:danger] = '评论不可为空'
       redirect_item @item
     end
+  end
+
+  def edit
+    @comment = Comment.find params[:id]
+  end
+
+  def update
+    @comment= Comment.find(params[:id])
+    if @comment.update_attributes(comment_params)
+      flash[:success] = '评论修改成功'
+      case @comment.comment_to
+      when "Topic"
+        redirect_to topic_path @comment.topic
+      when "Answer"
+        redirect_to question_path @comment.answer.question
+      end
+    else
+      render 'edit'
+    end
+  end
+
+  def destroy
+    Comment.find(params[:id]).destroy
+    flash[:success] = '评论删除成功'
+    redirect_to :back
   end
 
   private

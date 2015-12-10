@@ -5,6 +5,7 @@ example:
   type: Student
 
 teacher1:
+  id: 101
   name: lcy
   email: lcy@qq.com
   password_digest: <%= User.digest('password') %>

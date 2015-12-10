@@ -1,6 +1,10 @@
 class HomeworksController < ApplicationController
   before_action :logged_in_user
   before_action :teacher_admin_user, only: [:new, :create, :edit, :update, :destroy]
+  before_action only: [:edit, :update, :destroy] do
+    @homework = Homework.find params[:id]
+    correct_user @homework.user
+  end
 
   def index
     @homeworks = Homework.page params[:page]

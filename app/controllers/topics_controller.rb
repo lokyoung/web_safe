@@ -1,5 +1,9 @@
 class TopicsController < ApplicationController
-  before_action :logged_in_user
+  before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy]
+  before_action only: [:edit, :update, :destroy] do
+    @topic = Topic.find params[:id]
+    correct_user @topic.user
+  end
 
   def index
     # 根据分页显示问题
@@ -26,7 +30,7 @@ class TopicsController < ApplicationController
 
   def destroy
     Topic.find(params[:id]).destroy
-    flash[:success] = '问题删除成功'
+    flash[:success] = '话题删除成功'
     redirect_to topics_url
   end
 
@@ -37,7 +41,7 @@ class TopicsController < ApplicationController
   def update
     @topic= Topic.find(params[:id])
     if @topic.update_attributes(update_params)
-      flash[:success] = '修改成功'
+      flash[:success] = '修改话题成功'
       redirect_to @topic
     else
       render 'edit'

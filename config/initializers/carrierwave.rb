@@ -20,7 +20,7 @@ end
 
 CarrierWave.configure do |config|
   if Rails.env.test?
-    config.storage NullStorage
+    # config.storage NullStoragegt
   end
   if Rails.env.development?
     config.storage :file

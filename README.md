@@ -12,6 +12,7 @@ This is the source code of my web_safe site.
 ##运行项目
 ```sh
 $ bundle install
+$ rake db:migrate
 $ rails server
 $ bin/cable
 ```

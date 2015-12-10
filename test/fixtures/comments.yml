@@ -1,0 +1,28 @@
+comment_1:
+  id: 1
+  content: "hahahha"
+  user_id: 1
+  topic_id: 1
+  comment_to: "Topic"
+
+comment_2:
+  id: 2
+  content: "user 2"
+  user_id: 2
+  topic_id: 1
+  comment_to: "Topic"
+
+comment_3:
+  id: 3
+  content: "hahahha"
+  user_id: 1
+  answer_id: 1
+  comment_to: "Answer"
+
+comment_4:
+  id: 4
+  content: "user 2"
+  user_id: 2
+  answer_id: 1
+  comment_to: "Answer"
+

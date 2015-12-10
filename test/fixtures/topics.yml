@@ -1,0 +1,11 @@
+topic_1:
+  id: 1
+  title: "topic"
+  content: "topic test"
+  user_id: 1
+
+topic_2:
+  id: 2
+  title: "topic 2"
+  content: "topic test2"
+  user_id: 2

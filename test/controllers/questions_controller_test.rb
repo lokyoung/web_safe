@@ -49,7 +49,7 @@ class QuestionsControllerTest < ActionController::TestCase
     assert flash.present?
   end
 
-  test "valid edit by student" do
+  test "invalid edit by student" do
     log_in_as @user4
     patch :update, id: 1, question: { title: "", content: "okl", issolved: true }
     assert_equal @question.title, "question"
@@ -60,7 +60,7 @@ class QuestionsControllerTest < ActionController::TestCase
     assert_redirected_to root_url
   end
 
-  test "valid edit by teacher" do
+  test "invalid edit by teacher" do
     log_in_as @user2
     get :edit, id: 2
     assert_redirected_to root_url

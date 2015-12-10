@@ -84,6 +84,14 @@ class ApplicationController < ActionController::Base
         self.send(item + "=", item.capitalize.constantize.find(params[:id]))
       }
     end
+
+    #if args.include? :destroy
+      #define_method(:destroy){
+        #item = params[:controller].singularize
+        #self.class.send(:attr_accessor, item)
+        #self.send(item + "=", item.capitalize.constantize.find(params[:id]).destroy)
+      #}
+    #end
   end
 
 end

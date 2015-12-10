@@ -9,7 +9,9 @@ class Admin::CommentsController < Admin::AdminController
       flash[:success] = '评论修改成功'
       case @comment.comment_to
       when "Topic"
-        redirect_to admin_topic_show_comments_path(@comment.topic)
+        redirect_to show_comments_admin_topic_path(@comment.topic)
+      when "Answer"
+        redirect_to show_comments_admin_question_answer_path(@comment.answer.question, @comment.answer)
       end
     else
       render 'edit'
