@@ -87,6 +87,8 @@ Rails.application.routes.draw do
       end
     end
 
+    # resources :answers, only: [:edit, :update, :destro]
+
     resources :homeworks, only: [:index, :edit, :update, :destroy] do
       resources :stuhomeworks, only: [:index, :edit, :update, :destroy]
     end

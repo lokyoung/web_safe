@@ -1,6 +1,10 @@
 class AnnouncesController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy, :new, :edit, :update, :show]
   before_action :teacher_admin_user, only: [:new, :create, :destroy, :edit, :update]
+  before_action only: [:edit, :update, :destroy] do
+    @announce = Announce.find params[:id]
+    correct_user @announce.user
+  end
 
   def index
     @announces = Announce.page params[:page]

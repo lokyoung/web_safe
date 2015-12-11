@@ -79,7 +79,7 @@ class CoursewaresControllerTest < ActionController::TestCase
     log_in_as(@user3)
     title = 'update title'
     description = 'update description'
-    coursefile = fixture_file_upload('file/test_1.txt')
+    coursefile = fixture_file_upload('file/test_2.txt')
     #binding.pry
     patch :update, id: @courseware.id, courseware: { title: title,
                                                      description: description,
@@ -88,7 +88,7 @@ class CoursewaresControllerTest < ActionController::TestCase
     @courseware.reload
     assert_equal @courseware.title, title
     assert_equal @courseware.description, description
-    assert_equal @courseware[:coursefile], "test_1.txt"
+    assert_equal @courseware[:coursefile], "test_2.txt"
   end
 
 end

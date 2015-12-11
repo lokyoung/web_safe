@@ -11,8 +11,15 @@ teacher1:
   password_digest: <%= User.digest('password') %>
   type: Teacher
 
-admin1:
+teacher2:
   id: 102
+  name: lcy1
+  email: lcy1@qq.com
+  password_digest: <%= User.digest('password') %>
+  type: Teacher
+
+admin1:
+  id: 103
   name: lok
   email: lok@qq.com
   password_digest: <%= User.digest('password') %>
