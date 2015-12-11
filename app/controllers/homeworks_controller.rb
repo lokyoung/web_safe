@@ -61,7 +61,7 @@ class HomeworksController < ApplicationController
       @homework.stuclass_ids = stuclass_ids
 
       flash[:success] = '作业资料修改成功'
-      redirect_to homeworks_url
+      redirect_to @homework
     else
       render 'edit'
     end

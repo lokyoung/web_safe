@@ -77,8 +77,8 @@ class HomeworksControllerTest < ActionController::TestCase
     assert_equal @homework_2.title, title
     assert_equal @homework_2.description, description
     assert_equal @homework_2[:homeworkfile], "test_1.txt"
-    
-    
+
+
     assert_difference 'Homework.count', -1 do
       delete :destroy, id: 2
     end

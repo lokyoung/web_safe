@@ -53,4 +53,8 @@ class AdminAnnounceTest < ActionDispatch::IntegrationTest
     question.reload
     assert_equal question.issolved, true
   end
+
+  test "edit answers do" do
+
+  end
 end

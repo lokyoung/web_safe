@@ -5,6 +5,13 @@ class UsersControllerTest < ActionController::TestCase
     @user1 = users(:user_1)
     @user2 = users(:teacher1)
     @user3 = users(:admin1)
+    @user4 = Fabricate(:user)
+  end
+
+  test "fabricator user" do
+    log_in_as @user4
+    get :edit, id: @user4.id
+    assert_response :success
   end
 
   test "get user new" do

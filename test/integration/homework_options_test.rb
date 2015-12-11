@@ -5,13 +5,8 @@ class HomeworkOptionsTest < ActionDispatch::IntegrationTest
     @user1 = users(:user_1)
     @user2 = users(:teacher1)
     @user3 = users(:admin1)
-    @homework = Homework.create user_id: @user2.id, title: "test", description: "ok", homeworkfile: Rack::Test::UploadedFile.new('./test/file/test.txt')
-    @homework_1 = Homework.create user_id: @user3.id, title: "test", description: "ok", homeworkfile: Rack::Test::UploadedFile.new('./test/file/test.txt')
-  end
-
-  def teardown
-    @homework.destroy
-    @homework_1.destroy
+    #@homework = Homework.create user_id: @user2.id, title: "test", description: "ok", homeworkfile: Rack::Test::UploadedFile.new('./test/file/test.txt')
+    #@homework_1 = Homework.create user_id: @user3.id, title: "test", description: "ok", homeworkfile: Rack::Test::UploadedFile.new('./test/file/test.txt')
   end
 
   test "can not create unless teacher" do
@@ -91,7 +86,8 @@ class HomeworkOptionsTest < ActionDispatch::IntegrationTest
     description = 'update description'
     homeworkfile = fixture_file_upload('./test/file/test_1.txt')
     #binding.pry
-    homework = Homework.create user_id: @user3.id, title: "test", description: "ok", homeworkfile: Rack::Test::UploadedFile.new('./test/file/test.txt')
+    #homework = Homework.create user_id: @user3.id, title: "test", description: "ok", homeworkfile: Rack::Test::UploadedFile.new('./test/file/test.txt')
+    homework = Fabricate(:homework)
     patch homework_path homework, homework: { title: title,
                                               description: description,
                                               homeworkfile: homeworkfile }
@@ -99,6 +95,6 @@ class HomeworkOptionsTest < ActionDispatch::IntegrationTest
     homework.reload
     assert_equal homework.title, title
     assert_equal homework.description, description
-    #assert_equal homework[:homeworkfile], "test_1.txt"
+    assert_equal homework[:homeworkfile], "test_1.txt"
   end
 end

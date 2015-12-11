@@ -90,6 +90,7 @@ GEM
     erubis (2.7.0)
     eventmachine (1.0.8)
     execjs (2.6.0)
+    fabrication (2.14.1)
     faker (1.6.1)
       i18n (~> 0.5)
     faye-websocket (0.10.2)
@@ -249,6 +250,7 @@ DEPENDENCIES
   carrierwave (= 0.10.0)
   chinese_pinyin
   coffee-rails (~> 4.1.0)
+  fabrication
   faker
   guard
   guard-minitest
