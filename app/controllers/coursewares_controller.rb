@@ -18,6 +18,10 @@ class CoursewaresController < ApplicationController
     @courseware = current_user.coursewares.new(courseware_params)
     if @courseware.save
       flash[:success] = '上传课件成功'
+      if video_type.include? @courseware.coursefile.file.extension
+        @courseware.isvideo = true
+        @courseware.save
+      end
       current_user.followers.each do |user|
         Notification.create(user_id: user.id, title: "你关注的用户<a href=#{user_url(current_user)}>#{current_user.name}</a>发布新课件", content: "<a href=#{courseware_url(@courseware)}>#{@courseware.title}</a>", unread: true)
         ActionCable.server.broadcast "user:#{user.id}", { body: user.notifications.unread.count.to_s }

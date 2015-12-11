@@ -7,6 +7,7 @@
     <div class="form-group">
       <%= f.file_field :stuhomeworkfile, class: "form-control" %>
     </div>
+      <%= f.hidden_field :ischecked %>
     <div class="form-group">
       <%= f.submit "提交作业", class: "btn btn-primary" %>
     </div>

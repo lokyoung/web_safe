@@ -4,7 +4,7 @@
     <div class="panel panel-default">
       <div class="panel-heading">批改作业</div>
       <div class="panel-body">
-        <%= form_for [@homework,@stuhomework], url: check_complete_homework_stuhomework_path do |f| %>
+        <%= form_for @stuhomework, url: check_complete_stuhomework_path do |f| %>
           <%= render "shared/error_messages", object: f.object %>
           <div class="form-group">
             <%= f.text_field :mark, class: "form-control", placeholder: "在这里填写分数" %>

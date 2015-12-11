@@ -39,11 +39,11 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if params[:user][:sclass].present?
+    #if params[:user][:stuclass_id].present?
       # stuclass = Stuclass.where(scname: params[:user][:sclass])
       # stuclass << @user
-      @user.stuclass_id = Stuclass.find_by(scname: params[:user][:sclass]).id
-    end
+      #@user.stuclass_id = Stuclass.find_by(scname: params[:user][:stuclass_id]).id
+    #end
 
     if @user.update_attributes(user_params)
       # success
@@ -88,7 +88,7 @@ class UsersController < ApplicationController
   def user_params
     # 需要传入的params哈希参数包含:user元素，只允许传入name, email, passoword, password_confirmation属性
     # 如果没有指定:user会抛出异常
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :sid, :sclass)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :sid, :stuclass_id)
   end
 
   # 确保用户已经登录

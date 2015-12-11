@@ -5,7 +5,7 @@ class AnnouncesControllerTest < ActionController::TestCase
     @user1 = users(:example)
     @user2 = users(:teacher1)
     @user3 = users(:admin1)
-    @announce = announces(:announce_2)
+    @announce = announces(:announce_1)
   end
 
   test "can not create unless teacher" do
@@ -22,13 +22,13 @@ class AnnouncesControllerTest < ActionController::TestCase
       post :create, announce: { title: 'hah', content: 'content!!!' }
     end
     assert_redirected_to root_url
-    assert_difference 'Announce.count', -1 do
-      delete :destroy, id: 1
-    end
     patch :update, id: @announce.id, announce: { title: 'ha', content: 'content!!!' }
     @announce.reload
     assert_equal @announce.title, 'ha'
     assert_redirected_to @announce
+    assert_difference 'Announce.count', -1 do
+      delete :destroy, id: 1
+    end
   end
 
   test "admin can create and destroy and update" do
@@ -37,12 +37,12 @@ class AnnouncesControllerTest < ActionController::TestCase
       post :create, announce: { title: 'hah', content: 'content!!!' }
     end
     assert_redirected_to root_url
-    assert_difference 'Announce.count', -1 do
-      delete :destroy, id: 1
-    end
     patch :update, id: @announce.id, announce: { title: 'ha', content: 'content!!!' }
     @announce.reload
     assert_equal @announce.title, 'ha'
     assert_redirected_to @announce
+    assert_difference 'Announce.count', -1 do
+      delete :destroy, id: 1
+    end
   end
 end

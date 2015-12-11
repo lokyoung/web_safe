@@ -19,23 +19,23 @@
         <td><%= stuhomework.mark %></td>
         <% if teacher_admin? %>
           <td><a href="#{<%= stuhomework.stuhomeworkfile %>}">下载作业</a></td>
-          <td><%= link_to '评分', check_homework_stuhomework_path(@homework, stuhomework) %></td>
+          <td><%= link_to '评分', check_stuhomework_path(stuhomework) %></td>
         <% end %>
         <!--用户可以在老师批改之前修改或者删除自己的作业-->
         <% if current_user == stuhomework.user && !stuhomework.ischecked %>
-          <td><%= link_to edit_homework_stuhomework_path(@homework, stuhomework) do %>
+          <td><%= link_to edit_stuhomework_path(stuhomework) do %>
             <span class="glyphicon glyphicon-pencil"></span>
           <% end %> |
-          <%= link_to homework_stuhomework_path(@homework, stuhomework), method: :delete, data: { confirm: '确定要删除么' } do %>
+          <%= link_to stuhomework_path(stuhomework), method: :delete, data: { confirm: '确定要删除么' } do %>
             <span class="glyphicon glyphicon-trash"></span>
           <% end %>
         </td>
-        <% end %>
+      <% end %>
 
-      </tr>
-    <% end %>
-  </table>
+    </tr>
+  <% end %>
+</table>
 </div>
-<% if student? %>
+<% if student? && notcreated?(@homework) %>
   <%= render 'stuhomeworks/form' %>
 <% end %>

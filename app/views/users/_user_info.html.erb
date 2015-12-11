@@ -7,8 +7,8 @@
       用户名：<%= @user.name %><br/>
       邮箱：<%= @user.email %><br/>
       身份：<%= user_type @user.type %><br/>
-      <% if user_type(@user.type) == "学生" %>
-        班级：<%= @user.sclass %><br/>
+      <% if @user.stuclass_id.present? %>
+        班级：<%= Stuclass.find(@user.stuclass_id).scname %><br/>
         学号：<%= @user.sid %><br/>
       <% end %>
     </div>

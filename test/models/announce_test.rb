@@ -21,7 +21,7 @@ class AnnounceTest < ActiveSupport::TestCase
   end
 
   test "order should be the last created" do
-    assert_equal Announce.first, announces(:announce_b)
+    assert_equal Announce.first, announces(:announce_2)
   end
 
 end

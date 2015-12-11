@@ -9,17 +9,16 @@ class Admin::UsersController < Admin::AdminController
 
   def update
     @user = User.find(params[:id])
-    unless params[:user][:sclass] == ""
+    #if params[:user][:stuclass_id].present?
       # stuclass = Stuclass.where(scname: params[:user][:sclass])
       # stuclass << @user
-      @user.stuclass_id = Stuclass.find_by(scname: params[:user][:sclass]).id
-    end
+      #@user.stuclass_id = Stuclass.find_by(scname: params[:user][:stuclass_id]).id
+    #end
 
     if @user.update_attributes(user_params)
       # success
-      if params[:type] == "Teacher"
+      if params[:user][:type] == "Teacher"
         @user.stuclass_id = nil
-        @user.sclass = nil
         @user.sid = nil
         @user.save
       end
@@ -38,6 +37,6 @@ class Admin::UsersController < Admin::AdminController
 
   private
   def user_params
-    params.require(:user).permit(:name, :email, :type, :sid, :sclass)
+    params.require(:user).permit(:name, :email, :type, :sid, :stuclass_id)
   end
 end

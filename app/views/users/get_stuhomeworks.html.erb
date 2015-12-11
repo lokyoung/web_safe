@@ -27,7 +27,7 @@
               <td><%= stuhomework.ischecked %></td>
               <td><%= stuhomework.mark %></td>
               <td><%= stuhomework.remark %></td>
-              <td><%= link_to '评分', check_homework_stuhomework_path(homework, stuhomework) %></td>
+              <td><%= link_to '评分', check_stuhomework_path(stuhomework) %></td>
             <% end %>
             </tr>
           <% end %>
@@ -38,4 +38,3 @@
       <%= render 'panel/user_info' %>
     </div>
   </div>
-

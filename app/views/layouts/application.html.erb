@@ -15,7 +15,7 @@
     <div class="container">
 <!---布局中添加闪现的消息-->
       <% if logged_in? && student? %>
-        <% unless current_user.sid? || current_user.sclass? %>
+        <% if current_user.sid.blank? || current_user.stuclass_id.blank? %>
           <div class="alert alert-warning">请尽快将您的个人信息填写完整</div>
         <% end %>
       <% end %>

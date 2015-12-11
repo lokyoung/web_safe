@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151202063346) do
+ActiveRecord::Schema.define(version: 20151210094823) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,9 +57,10 @@ ActiveRecord::Schema.define(version: 20151202063346) do
     t.string   "title"
     t.text     "description"
     t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.string   "coursefile"
+    t.boolean  "isvideo",     default: false
   end
 
   add_index "coursewares", ["user_id", "created_at"], name: "index_coursewares_on_user_id_and_created_at", using: :btree
@@ -155,7 +156,6 @@ ActiveRecord::Schema.define(version: 20151202063346) do
     t.string   "password_digest"
     t.boolean  "teacher",         default: false
     t.string   "sid"
-    t.string   "sclass"
     t.string   "remember_digest"
     t.string   "type",            default: "Student"
     t.integer  "stuclass_id"

@@ -1,13 +1,13 @@
 <% provide(:title, "首页") %>
-<% if logged_in?%>
+<% if logged_in? %>
   <div class="row">
     <div class="col-md-9">
       <%= render 'panel/item_list', contents: @announces, title: '公告列表' %>
-      <% unless Courseware.last.nil? %>
+      <% if Courseware.all.where(isvideo: true).present? %>
         <div class="panel panel-default">
           <div class="panel-heading">最新视频</div>
           <div class="panel-body">
-            <video width="800" src=<%= "#{Courseware.last.coursefile}" %> controls="controls"></video>
+            <video width="800" src=<%= "#{Courseware.all.where(isvideo: true).last.coursefile}" %> controls="controls"></video>
           </div>
         </div>
       <% end %>

@@ -21,6 +21,20 @@ class StuclassesController < ApplicationController
     @stuclass = Stuclass.find(params[:id])
   end
 
+  def edit
+    @stuclass = Stuclass.find(params[:id])
+  end
+
+  def update
+    @stuclass = Stuclass.find(params[:id])
+    if @stuclass.update_attributes(stuclass_params)
+      flash[:success] = '班级信息修改成功'
+      redirect_to @stuclass
+    else
+      render 'edit'
+    end
+  end
+
   def destroy
     Stuclass.find(params[:id]).destroy
     flash[:success] = '班级删除成功'

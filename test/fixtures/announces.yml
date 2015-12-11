@@ -1,23 +1,17 @@
-announce_a:
+announce_1:
+  id: 1
+  user_id: 101
   title: "Title 1"
   content: "Ok"
   created_at: <%= 30.minutes.ago %>
 
-announce_b:
+announce_2:
   title: "Title 2"
   content: "Aha"
   created_at: <%= 10.minutes.ago %>
 
-announce_c:
+announce_3:
   title: "Ttile 3"
   content: "HEHE"
   created_at: <%= 20.minutes.ago %>
 
-# 产生测试数据
-<% 50.times do |n| %>
-announce_<%= n %>:
-  id: <%= n %>
-  title: <%= Faker::Lorem.sentence(10) %>
-  created_at: <%= 15.minutes.ago %>
-  user: example
-<% end %>

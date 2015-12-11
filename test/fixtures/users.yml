@@ -12,6 +12,7 @@ teacher1:
   type: Teacher
 
 admin1:
+  id: 102
   name: lok
   email: lok@qq.com
   password_digest: <%= User.digest('password') %>

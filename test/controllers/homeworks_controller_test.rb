@@ -20,7 +20,7 @@ class HomeworksControllerTest < ActionController::TestCase
   test "teacher can create and destroy" do
     log_in_as(@user2)
     assert_difference 'Homework.count', 1 do
-      post :create, homework: { title: 'hah', description: 'this is a des', homeworkfile: '123' }
+      post :create, homework: { title: 'hah', description: 'this is a des', homeworkfile: Rack::Test::UploadedFile.new('./test/file/test_1.txt') }
     end
     assert_redirected_to homeworks_url
     assert_difference 'Homework.count', -1 do
@@ -44,7 +44,7 @@ class HomeworksControllerTest < ActionController::TestCase
   test "admin can create and destroy" do
     log_in_as(@user3)
     assert_difference 'Homework.count', 1 do
-      post :create, homework: { title: 'hah', description: 'this is a des', homeworkfile: '123' }
+      post :create, homework: { title: 'hah', description: 'this is a des', homeworkfile: Rack::Test::UploadedFile.new('./test/file/test_1.txt') }
     end
     assert_redirected_to homeworks_url
     assert_difference 'Homework.count', -1 do

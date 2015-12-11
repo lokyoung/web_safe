@@ -1,16 +1,13 @@
 class StuhomeworksController < ApplicationController
   before_action :logged_in_user
   before_action :ischecked, only: [:edit, :update]
+  before_action only: [:create] do
+    @homework = Homework.find(params[:homework_id])
+    notcreated? @homework
+  end
 
   def index
     @stuhomeworks = Stuhomework.page params[:page]
-  end
-
-  def new
-    @stuhomework = Stuhomework.new
-  end
-
-  def show
   end
 
   def create
@@ -21,12 +18,12 @@ class StuhomeworksController < ApplicationController
       flash[:success] = '提交作业成功'
       redirect_to @homework
     else
+      flash[:warning] = '提交失败'
       redirect_to @homework
     end
   end
 
   def edit
-    @homework = Homework.find(params[:homework_id])
     @stuhomework = Stuhomework.find(params[:id])
   end
 
@@ -42,14 +39,14 @@ class StuhomeworksController < ApplicationController
   end
 
   def destroy
-    @homework = Homework.find params[:homework_id]
-    Stuhomework.find(params[:id]).destroy
+    @stuhomework = Stuhomework.find(params[:id])
+    @homework = @stuhomework.homework
+    @stuhomework.destroy
     flash[:success] = '作业已删除'
     redirect_to @homework
   end
 
   def check
-    @homework = Homework.find(params[:homework_id])
     @stuhomework = Stuhomework.find(params[:id])
   end
 
@@ -74,11 +71,12 @@ class StuhomeworksController < ApplicationController
   end
 
   def ischecked
-    @homework = Homework.find params[:homework_id]
     @stuhomework = Stuhomework.find params[:id]
     if @stuhomework.ischecked?
+      @homework = @stuhomework.homework
       flash[:danger] = '已经批改过，无法进行修改'
       redirect_to @homework
     end
   end
+
 end
