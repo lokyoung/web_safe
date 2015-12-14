@@ -92,20 +92,4 @@ public class Wannianli {
 		}
 		 System.out.println("整月之间的天数差:"+month_sum);
 		 //5.求出输入输入月的一号是星期几
-		 int week=(year_sum+month_sum+1)%7;//余几就是星期几
-		 System.out.println("星期日\t星期一\t星期二\t星期三\t星期四\t星期五\t星期六");
-		 for(int i=1;i<=week;i++){
-			 
-			 System.out.print("\t");
-		 }
-		 for(int i=1;i<=month_days;i++){
-			 System.out.print(i+"\t");
-			if((week+i-1)%7==6){
-				System.out.println();
-			}
-		 }
-		
-	}
-
-	
-}
+		 int week

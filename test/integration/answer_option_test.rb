@@ -9,7 +9,7 @@ class AnswerOptionTest < ActionDispatch::IntegrationTest
     @answer_2 = answers(:answer_2)
   end
 
-  test "user add and delete answer" do
+  test "user can add answer" do
     log_in_as @user_1
     get question_path id: 1
     assert_response :success
@@ -23,6 +23,10 @@ class AnswerOptionTest < ActionDispatch::IntegrationTest
       post question_answers_path(question_id: 1), answer: { content: '' }
     end
     assert_equal '答案不可为空', flash[:danger]
+  end
+
+  test "user can delete their own answer" do
+    log_in_as @user_1
     assert_difference 'Answer.count', -1 do
       delete answer_path id: 1
     end
@@ -47,19 +51,23 @@ class AnswerOptionTest < ActionDispatch::IntegrationTest
     assert_equal @answer_2.content, "user 2"
   end
 
-  test "admin user can edit and destroy others" do
+  test "admin user can edit others" do
     log_in_as @user_2
     get edit_answer_path id: 1
     assert_response :success
-    assert_difference 'Answer.count', -1 do
-      delete answer_path id: 1
-    end
-    assert_redirected_to question_url id: 1
     content = "edit as user admin"
     patch answer_path id: 2, answer: { content: content }
     assert_redirected_to question_url id: 1
     @answer_2.reload
     assert_equal @answer_2.content, content
+  end
+
+  test "admin can destroy others" do
+    log_in_as @user_2
+    assert_difference 'Answer.count', -1 do
+      delete answer_path id: 1
+    end
+    assert_redirected_to question_url id: 1
   end
 
 end

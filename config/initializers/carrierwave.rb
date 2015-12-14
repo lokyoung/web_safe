@@ -19,15 +19,15 @@ class NullStorage
 end
 
 CarrierWave.configure do |config|
-  if Rails.env.test?
-    # config.storage NullStoragegt
-  end
+  #if Rails.env.test?
+    #config.storage NullStorage
+  #end
   if Rails.env.development?
     config.storage :file
   end
 
   #def store_dir
-    #"uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+  #"uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   #end
 
   CarrierWave::SanitizedFile.sanitize_regexp = /[^[:word:]\.\-\+]/

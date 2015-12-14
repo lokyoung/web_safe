@@ -1,9 +1,19 @@
 class StuhomeworksController < ApplicationController
   before_action :logged_in_user
   before_action :ischecked, only: [:edit, :update]
+  before_action only: [:check, :check_complete] do
+    if !teacher_admin?
+      flash[:warning] = '权限不够，无法操作'
+      redirect_to root_url
+    end
+  end
   before_action only: [:create] do
     @homework = Homework.find(params[:homework_id])
     notcreated? @homework
+  end
+  before_action only: [:edit, :update] do
+    @stuhomework = Stuhomework.find params[:id]
+    correct_user @stuhomework.user
   end
 
   def index

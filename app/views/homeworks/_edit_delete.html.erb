@@ -1,5 +1,5 @@
 <% if current_user == @homework.user %>
-  <%= link_to edit_announce_path(@homework) do %>
+  <%= link_to edit_homework_path(@homework) do %>
     <span class="glyphicon glyphicon-pencil"></span>
   <% end %> |
   <%= link_to @homework, method: :delete, data: { confirm: '确定要删除么' } do %>

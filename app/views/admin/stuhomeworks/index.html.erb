@@ -13,7 +13,7 @@
       <tr>
         <td><%= stuhomework.user.name %></td>
         <td><%= stuhomework.user.sid %></td>
-        <td><%= stuhomework.user.sclass %></td>
+        <td><%= Stuclass.find(stuhomework.user.stuclass_id).scname %></td>
         <td><%= link_to '查看附件', stuhomework.stuhomeworkfile.to_s %></td>
         <td><%= stuhomework.ischecked ? '是' : '否'%></td>
         <td><%= stuhomework.mark %></td>

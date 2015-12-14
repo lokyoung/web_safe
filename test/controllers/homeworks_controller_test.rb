@@ -10,11 +10,6 @@ class HomeworksControllerTest < ActionController::TestCase
     @homework_2 = Homework.create user_id: @user4.id, title: "test", description: "ok", homeworkfile: Rack::Test::UploadedFile.new('./test/file/test.txt')
   end
 
-  #def teardown
-    #@homework.destroy
-    #@homework_2.destroy
-  #end
-
   test "can not create unless teacher" do
     log_in_as(@user1)
     assert_no_difference 'Homework.count' do

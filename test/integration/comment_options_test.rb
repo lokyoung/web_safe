@@ -8,7 +8,7 @@ class CommentOptionsTest < ActionDispatch::IntegrationTest
     @comment_2 = comments(:comment_2)
   end
 
-  test "user can add comment to topic and answer" do
+  test "user can add comment to topic" do
     log_in_as @user_1
     # 对话题进行评论
     assert_difference 'Comment.count', 1 do
@@ -22,7 +22,10 @@ class CommentOptionsTest < ActionDispatch::IntegrationTest
     end
     assert_equal '评论不可为空', flash[:danger]
     assert_redirected_to topic_url id: 1
+  end
 
+  test "user can add comment to answer" do
+    log_in_as @user_1
     # 对答案进行评论
     assert_difference 'Comment.count', 1 do
       post comments_path, type: 'answer', answer_id: 1, comment: { content: 'comment' }
@@ -57,11 +60,16 @@ class CommentOptionsTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "admin can edit and destroy" do
+  test "admin can edit others comment" do
     log_in_as @user_a
     patch comment_path @comment_2, comment: { content: 'content edit' }
+    @comment_2.reload
+    assert_equal @comment_2.content, 'content edit'
     assert_redirected_to topic_path @comment_2.topic
+  end
 
+  test "admin can destroy others comment" do
+    log_in_as @user_a
     assert_difference 'Comment.count', -1 do
       delete comment_path @comment_2
     end

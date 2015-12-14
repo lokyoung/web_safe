@@ -28,6 +28,5 @@ module ApplicationCable
       @log.puts msg
       @log.flush
     end
-
   end
 end
