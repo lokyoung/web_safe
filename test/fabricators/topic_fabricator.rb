@@ -1,5 +1,5 @@
-Fabricator(:announce_1, from: :announce) do
+Fabricator(:topic_1, from: :topic) do
   title { Faker::Name.name }
   content { Faker::Lorem.sentence }
-  user
+  user { Fabricate(:student) }
 end

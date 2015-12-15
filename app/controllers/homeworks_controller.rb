@@ -26,7 +26,8 @@ class HomeworksController < ApplicationController
         stuclass.students.each do |student|
           # 向当前班级的同学发出通知
           Notification.create(user_id: student.id, title: "您有新的作业需要完成", content: "<a href=#{homework_url(@homework)}>#{@homework.title}</a>", unread: true)
-          ActionCable.server.broadcast "user:#{student.id}", { body: student.notifications.unread.count.to_s }
+          # 通过ActionCable发送notice
+          send_notice student
         end
       end
 

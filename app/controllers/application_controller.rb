@@ -39,6 +39,10 @@ class ApplicationController < ActionController::Base
     redirect_to(root_url) unless teacher?
   end
 
+  def send_notice user
+    ActionCable.server.broadcast "user:#{user.id}", { body: user.notifications.unread.count.to_s }
+  end
+
   def logged_in_user
     unless logged_in?
       store_location

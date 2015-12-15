@@ -1,7 +1,7 @@
 class CoursewaresController < ApplicationController
   before_action :logged_in_user
   before_action :teacher_admin_user, only: [:new, :create, :edit, :update, :destroy]
-  before_action only: [:edit, :update] do
+  before_action only: [:edit, :update, :destroy] do
     @courseware = Courseware.find params[:id]
     correct_user @courseware.user
   end

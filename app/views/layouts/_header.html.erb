@@ -2,76 +2,68 @@
 <div class="container">
   <%= link_to "花椒网安", root_path, id: "logo"  %>
   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-    <ul class="nav navbar-nav">
-      <li>
-      <%= link_to root_path do %>
-        <span class="glyphicon glyphicon-home">首页</span>
-      <% end %>
+    <%= render_list class: "nav navbar-nav" do |li|
+      li << link_to(t('首页'), root_path)
+      if logged_in?
+        li << link_to(t('问答'), questions_path)
+        li << link_to(t('讨论'), topics_path)
+      end
+    end %>
+  <ul class="nav navbar-nav">
+    <% if logged_in? %>
+      <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        <span>教学</span>
+        <b class="caret"></b>
+      </a>
+      <ul class="dropdown-menu">
+        <li><%= link_to '课件', coursewares_path %></li>
+        <li><%= link_to '作业', homeworks_path %></li>
+        <% if student? %>
+          <li class="divider"></li>
+          <li><%= link_to '我的作业', stu_home_path %></li>
+        <% end %>
+        <% if teacher_admin? %>
+          <li class="divider"></li>
+          <li><%= link_to '教学班级管理', stuclasses_path %></li>
+        <% end %>
+      </ul>
       </li>
-      <% if logged_in? %>
-        <li>
-        <%= link_to questions_path do %>
-          <span class="glyphicon glyphicon-blackboard">知识问答</span>
-        <% end %>
-        </li>
-        <li>
-        <%= link_to topics_path do %>
-          <span class="glyphicon glyphicon-comment">自由讨论</span>
-        <% end %>
-        </li>
-        <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-          <span class="glyphicon glyphicon-th-list">教学</span>
-          <b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu">
-          <li><%= link_to '课件', coursewares_path %></li>
-          <li><%= link_to '作业', homeworks_path %></li>
-          <% if student? %>
-            <li class="divider"></li>
-            <li><%= link_to '我的作业', stu_home_path %></li>
-          <% end %>
-          <% if teacher_admin? %>
-            <li class="divider"></li>
-            <li><%= link_to '教学班级管理', stuclasses_path %></li>
-          <% end %>
-        </ul>
-        </li>
-      <% end %>
-    </ul>
-    <nav>
-    <ul class="nav navbar-nav pull-right">
-      <% if logged_in? %>
-        <%
-            back_class = ""
-        back_class = "new" if unread_notify_count > 0
-      %>
-    <li>
-    <%= link_to notifications_path do %>
-      <span class="<%= back_class %>">
-        <span class="glyphicon glyphicon-bell" id="notices" data-channel="notices">
-          <% if unread_notify_count != 0 %>
-            <%= unread_notify_count %>
-          <% end %>
-        </span>
-      </span>
     <% end %>
-    </li>
-    <li class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-      <%= current_user.name %>
-      <b class="caret"></b>
-    </a>
-    <ul class="dropdown-menu">
-      <li><%= link_to '个人资料', current_user %></li>
-      <li><%= link_to '设置', edit_user_path(current_user) %></li>
-      <li class="divider"></li>
-      <li><%= link_to '安全退出', logout_path, method: "delete" %></li>
-    </ul>
-    </li>
-  <% else%>
-    <li><%= link_to '登录', login_path %></li>
+  </ul>
+  <nav>
+  <ul class="nav navbar-nav pull-right">
+    <% if logged_in? %>
+      <%
+          back_class = ""
+      back_class = "new" if unread_notify_count > 0
+    %>
+  <li>
+  <%= link_to notifications_path do %>
+    <span class="<%= back_class %>">
+      <span class="glyphicon glyphicon-bell" id="notices" data-channel="notices">
+        <% if unread_notify_count != 0 %>
+          <%= unread_notify_count %>
+        <% end %>
+      </span>
+    </span>
   <% end %>
+  </li>
+  <li class="dropdown">
+  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+    <%= current_user.name %>
+    <b class="caret"></b>
+  </a>
+  <ul class="dropdown-menu">
+    <li><%= link_to '个人资料', current_user %></li>
+    <li><%= link_to '设置', edit_user_path(current_user) %></li>
+    <li class="divider"></li>
+    <li><%= link_to '安全退出', logout_path, method: "delete" %></li>
+  </ul>
+  </li>
+<% else%>
+  <li><%= link_to '登录', login_path %></li>
+<% end %>
 </ul>
 </nav>
 </div>

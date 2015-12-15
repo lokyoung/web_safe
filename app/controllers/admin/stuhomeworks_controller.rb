@@ -5,15 +5,15 @@ class Admin::StuhomeworksController < Admin::AdminController
   end
 
   def edit
-    @homework = Homework.find params[:homework_id]
     @stuhomework = Stuhomework.find params[:id]
   end
 
   def update
     @stuhomework = Stuhomework.find params[:id]
+    #binding.pry
     if @stuhomework.update_attributes stuhomework_params
       flash[:success] = '学生作业资料修改成功'
-      redirect_to admin_homework_stuhomeworks_url
+      redirect_to admin_homework_stuhomeworks_url @stuhomework.homework
     else
       render 'edit'
     end
@@ -24,7 +24,7 @@ class Admin::StuhomeworksController < Admin::AdminController
     file_delete stuhomework.stuhomeworkfile
     stuhomework.destroy
     flash[:success] = '作业删除成功'
-    redirect_to admin_homework_stuhomeworks_url
+    redirect_to admin_homework_stuhomeworks_url stuhomework.homework
   end
 
   private

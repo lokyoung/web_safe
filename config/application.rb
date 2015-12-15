@@ -28,5 +28,10 @@ module WebSafe
 
     # 处理AJAX兼容
     config.action_view.embed_authenticity_token_in_remote_forms = true
+    # 使用fabrication代替fixture
+    config.generators do |g|
+      g.test_framework      :minitest, fixture_replacement: :fabrication
+      g.fixture_replacement :fabrication, dir: "test/fabricators"
+    end
   end
 end

@@ -1,7 +1,7 @@
 <% if current_user.present? %>
 <div class="panel panel-default">
   <div class="panel-body text-center">
-    <%= link_to send("new_#{content}_path"), class: 'btn btn-success' do%>
+    <%= link_to send("new_#{content}_path"), class: 'btn btn-primary' do%>
       <span class="glyphicon glyphicon-pencil"><strong><%= title %></strong></span>
   <% end %>
 </div>

@@ -30,7 +30,8 @@ admin1:
 user_<%= n %>:
   id: <%= n %>
   name: <%= Faker::Lorem.sentence(1) %>
-  email: <%= "#{n}@qq.com" %>
+  email: <%= "#{n}@qqa.com" %>
   password_digest: <%= User.digest('password') %>
   type: Student
+  stuclass_id: 1
 <% end %>

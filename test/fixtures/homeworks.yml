@@ -2,12 +2,12 @@ homework_1:
   id: 1
   title: 'homework 1'
   description: 'homework des'
-  homeworkfile: '123'
+  homeworkfile: <%= Rack::Test::UploadedFile.new('./test/file/test_1.txt') %>
   user_id: 101
 
 homework_2:
   id: 2
   title: 'homework 2'
   description: 'homework des 2'
-  homeworkfile: '123'
+  homeworkfile: <%= Rack::Test::UploadedFile.new('./test/file/test_1.txt') %>
   user_id: 102

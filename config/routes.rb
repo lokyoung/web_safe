@@ -80,18 +80,20 @@ Rails.application.routes.draw do
     end
 
     resources :questions, only: [:index, :edit, :update, :destroy] do
-      resources :answers, only: [:index, :edit, :update, :destroy] do
-        member do
-          get :show_comments
-        end
+      resources :answers, only: [:index]
+    end
+    resources :answers, only: [:edit, :update, :destroy] do
+      member do
+        get :show_comments
       end
     end
 
     # resources :answers, only: [:edit, :update, :destro]
 
     resources :homeworks, only: [:index, :edit, :update, :destroy] do
-      resources :stuhomeworks, only: [:index, :edit, :update, :destroy]
+      resources :stuhomeworks, only: [:index]
     end
+    resources :stuhomeworks, only: [:edit, :update, :destroy]
     resources :comments
   end
 

@@ -9,7 +9,7 @@ class CoursewaresControllerTest < ActionController::TestCase
     @courseware_1 = Courseware.create user_id: @user3.id, title: "test", description: "ok", coursefile: Rack::Test::UploadedFile.new('./test/file/test.txt')
   end
 
-  test "can not create unless teacher" do
+  test "student can not create" do
     log_in_as(@user1)
     assert_no_difference 'Courseware.count' do
       post :create, courseware: { title: 'hah', description: 'this is a des', coursefile: Rack::Test::UploadedFile.new('./test/file/test.txt') }
@@ -17,12 +17,16 @@ class CoursewaresControllerTest < ActionController::TestCase
     assert_redirected_to root_url
   end
 
-  test "teacher can create destroy and update" do
+  test "teacher can create courseware" do
     log_in_as(@user2)
     assert_difference 'Courseware.count', 1 do
       post :create, courseware: { title: 'hah', description: 'this is a des', coursefile: fixture_file_upload('file/test.txt') }
     end
     assert_redirected_to coursewares_url
+  end
+
+  test "teacher can update" do
+    log_in_as(@user2)
     title = 'update title'
     description = 'update description'
     coursefile = fixture_file_upload('file/test_1.txt')
@@ -34,7 +38,10 @@ class CoursewaresControllerTest < ActionController::TestCase
     @courseware.reload
     assert_equal @courseware.title, title
     assert_equal @courseware.description, description
-    assert_equal @courseware[:coursefile], "test_1.txt"
+  end
+
+  test "teacher can destory" do
+    log_in_as @user2
     assert_difference 'Courseware.count', -1 do
       delete :destroy, id: @courseware.id
     end

@@ -18,10 +18,10 @@
         <td><%= stuhomework.ischecked ? '是' : '否'%></td>
         <td><%= stuhomework.mark %></td>
         <td>
-          <%= link_to edit_admin_homework_stuhomework_path(@homework, stuhomework) do %>
+          <%= link_to edit_admin_stuhomework_path(stuhomework) do %>
             <span class="glyphicon glyphicon-pencil"></span>
           <% end %> |
-          <%= link_to admin_homework_stuhomework_path(@homework, stuhomework), method: :delete, data: { confirm: '确定要删除么' } do %>
+          <%= link_to admin_stuhomework_path(stuhomework), method: :delete, data: { confirm: '确定要删除么' } do %>
             <span class="glyphicon glyphicon-trash"></span>
           <% end %>
         </td>

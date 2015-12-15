@@ -52,6 +52,7 @@ gem 'puma'
 gem 'faker'
 # 测试数据
 gem 'fabrication'
+gem 'bootstrap_helper'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

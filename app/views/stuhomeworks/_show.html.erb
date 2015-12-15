@@ -14,7 +14,11 @@
       <tr>
         <td><%= stuhomework.user.name %></td>
         <td><%= stuhomework.user.sid %></td>
-        <td><%= Stuclass.find(stuhomework.user.stuclass_id).scname %></td>
+        <td>
+          <% if stuhomework.user.stuclass_id.present? %>
+            <%= Stuclass.find(stuhomework.user.stuclass_id).scname %>
+          <% end %>
+        </td>
         <td><%= stuhomework.ischecked %></td>
         <td><%= stuhomework.mark %></td>
         <% if teacher_admin? %>

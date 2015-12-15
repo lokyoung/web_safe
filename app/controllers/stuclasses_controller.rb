@@ -1,4 +1,5 @@
 class StuclassesController < ApplicationController
+  before_action :teacher_admin_user
   def index
     @stuclasses = Stuclass.page params[:page]
   end

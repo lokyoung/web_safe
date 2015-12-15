@@ -10,11 +10,11 @@
       <tr>
         <td><%= answer.content %></td>
         <td><%= answer.user.name %></td>
-        <td><%= link_to '点击查看', show_comments_admin_question_answer_path(id: answer.id) %></td>
-        <td><%= link_to edit_admin_question_answer_path(@question, answer) do %>
+        <td><%= link_to '点击查看', show_comments_admin_answer_path(id: answer.id) %></td>
+        <td><%= link_to edit_admin_answer_path(answer) do %>
           <span class="glyphicon glyphicon-pencil"></span>
         <% end %> |
-        <%= link_to admin_question_answer_path(@question, answer), method: :delete, data: { confirm: '确定要删除么' } do %>
+        <%= link_to admin_answer_path(answer), method: :delete, data: { confirm: '确定要删除么' } do %>
           <span class="glyphicon glyphicon-trash"></span>
         <% end %></td>
     </tr>

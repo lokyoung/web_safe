@@ -66,11 +66,11 @@ class AdminAnnounceTest < ActionDispatch::IntegrationTest
 
   test "edit answers" do
     answer = Answer.find(1)
-    get edit_admin_question_answer_path question_id: 1, id: 1
+    get edit_admin_answer_path id: 1
     assert_select "div.panel-heading", text: "答案修改"
     assert_response :success
 
-    patch admin_question_answer_path(question_id:1, id: 1), answer: { content: 'edit' }
+    patch admin_answer_path(id: 1), answer: { content: 'edit' }
     answer.reload
     assert_equal answer.content, 'edit'
   end
@@ -79,8 +79,45 @@ class AdminAnnounceTest < ActionDispatch::IntegrationTest
     answer = Answer.find(1)
     qid = answer.question.id
     assert_difference 'Answer.count', -1 do
-      delete admin_question_answer_path question_id: 1, id: 1
+      delete admin_answer_path id: 1
     end
     assert_redirected_to admin_question_answers_url question_id: qid
+  end
+
+  test "edit stuclass" do
+    stuclass = Fabricate(:stuclass)
+    get edit_admin_stuclass_path(stuclass)
+    assert_select "div.panel-heading", text: "班级信息修改"
+    assert_response :success
+
+    patch admin_stuclass_path(stuclass), stuclass: { scname: 'stuclass 1' }
+    stuclass.reload
+    assert_equal stuclass.scname, 'stuclass 1'
+  end
+
+  test "delete stuclass" do
+    stuclass = Fabricate(:stuclass)
+    assert_difference 'Stuclass.count', -1 do
+      delete admin_stuclass_path id: stuclass.id
+    end
+    assert_redirected_to admin_stuclasses_url
+  end
+
+  test "edit topic" do
+    topic = Fabricate(:topic_1)
+    get edit_admin_topic_path(topic)
+    assert_response :success
+
+    patch admin_topic_path(topic), topic: { title: 'update', content: 'update content' }
+    topic.reload
+    assert_equal topic.title, 'update'
+  end
+
+  test "delte topic" do
+    topic = Fabricate(:topic_1)
+    assert_difference 'Topic.count', -1 do
+      delete admin_topic_path id: topic.id
+    end
+    assert_redirected_to admin_topics_url
   end
 end

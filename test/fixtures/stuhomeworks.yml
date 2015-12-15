@@ -1,0 +1,11 @@
+stuhomework_1:
+  id: 1
+  stuhomeworkfile: <%= Rack::Test::UploadedFile.new('./test/file/test_1.txt') %>
+  user_id: 1
+  homework_id: 1
+
+stuhomework_2:
+  id: 2
+  stuhomeworkfile: <%= Rack::Test::UploadedFile.new('./test/file/test_2.txt') %>
+  user_id: 2
+  homework_id: 1

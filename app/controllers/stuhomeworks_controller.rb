@@ -64,8 +64,7 @@ class StuhomeworksController < ApplicationController
     @stuhomework = Stuhomework.find(params[:id])
     if @stuhomework.update_attributes(checked_params.merge(ischecked: true))
       flash[:success] = '作业批改成功'
-      @homework = @stuhomework.homework
-      redirect_to @homework
+      redirect_to @stuhomework.homework
     else
       render 'check'
     end

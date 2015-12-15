@@ -5,7 +5,6 @@ class Admin::AnswersController < Admin::AdminController
   end
 
   def edit
-    @question = Question.find params[:question_id]
     @answer = Answer.find(params[:id])
   end
 
@@ -13,16 +12,16 @@ class Admin::AnswersController < Admin::AdminController
     @answer = Answer.find(params[:id])
     if @answer.update_attributes(answer_params)
       flash[:success] = '答案修改成功'
-      redirect_to admin_question_answers_url
+      redirect_to admin_question_answers_url(@answer.question)
     else
       render 'edit'
     end
   end
 
   def destroy
-    Answer.find(params[:id]).destroy
+    answer = Answer.find(params[:id]).destroy
     flash[:success] = '答案删除成功'
-    redirect_to admin_question_answers_url
+    redirect_to admin_question_answers_url answer.question
   end
 
   def show_comments
