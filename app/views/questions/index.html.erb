@@ -17,14 +17,15 @@
             [未解决]
           <% end %>
           <%= link_to question.title, question %>
-        </li>
-      <% end %>
-    </ul>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <%= paginate @questions %>
   </div>
-  <%= paginate @questions %>
-</div>
-<div class="col-md-3">
-  <%= render 'panel/user_info' %>
-  <%= render 'panel/new_item', content: 'question', title: '新建问题' %>
-</div>
+  <div class="col-md-3">
+    <%= render 'panel/user_info' %>
+    <%= render 'panel/new_item', content: 'question', title: '新建问题' %>
+    <%= render 'panel/study_resources' %>
+  </div>
 </div>

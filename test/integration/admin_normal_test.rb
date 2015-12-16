@@ -2,7 +2,11 @@ require 'test_helper'
 
 class AdminAnnounceTest < ActionDispatch::IntegrationTest
   def setup
-    log_in_as users(:admin1)
+    #log_in_as users(:admin1)
+    #log_in_as Fabricate(:admin)
+    #log_in_as Fabricate(:admin)
+    @user ||= Fabricate(:admin)
+    log_in_as @user
   end
 
   test "edit announce" do
@@ -85,7 +89,7 @@ class AdminAnnounceTest < ActionDispatch::IntegrationTest
   end
 
   test "edit stuclass" do
-    stuclass = Fabricate(:stuclass)
+    stuclass = Fabricate(:stuclass_1)
     get edit_admin_stuclass_path(stuclass)
     assert_select "div.panel-heading", text: "班级信息修改"
     assert_response :success
@@ -96,7 +100,7 @@ class AdminAnnounceTest < ActionDispatch::IntegrationTest
   end
 
   test "delete stuclass" do
-    stuclass = Fabricate(:stuclass)
+    stuclass = Fabricate(:stuclass_1)
     assert_difference 'Stuclass.count', -1 do
       delete admin_stuclass_path id: stuclass.id
     end

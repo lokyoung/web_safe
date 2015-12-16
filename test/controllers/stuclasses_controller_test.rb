@@ -2,9 +2,9 @@ require 'test_helper'
 
 class StuclassesControllerTest < ActionController::TestCase
   def setup
-    @user_1 = Fabricate(:user)
-    @user_2 = Fabricate(:teacher)
-    @stuclass = Fabricate(:stuclass)
+    @user_1 ||= Fabricate(:student)
+    @user_2 ||= Fabricate(:teacher)
+    @stuclass ||= @user_1.stuclass
   end
 
   test "student can't create the stuclass" do

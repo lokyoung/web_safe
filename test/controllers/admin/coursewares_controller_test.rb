@@ -2,12 +2,12 @@ require 'test_helper'
 
 class Admin::CoursewaresControllerTest < ActionController::TestCase
   def setup
-    log_in_as Fabricate(:admin)
+    @user ||= Fabricate(:admin)
+    log_in_as @user
     @courseware = Fabricate(:courseware_1)
   end
 
   test "edit" do
-    #get edit_admin_courseware_path(courseware)
     get :edit, id: @courseware.id
     assert_select "div.panel-heading", text: "课件修改"
     assert_response :success

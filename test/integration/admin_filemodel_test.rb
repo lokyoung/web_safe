@@ -3,15 +3,15 @@ require 'test_helper'
 class AdminFilemodelTest < ActionDispatch::IntegrationTest
   def setup
     #log_in_as Fabricate(:admin)
-    log_in_as users(:admin1)
+    #log_in_as users(:admin1)
+    @user ||= Fabricate(:admin)
+    log_in_as @user
   end
 
   test "edit courseware" do
-    #courseware = coursewares(:courseware_a)
     courseware = Fabricate(:courseware_1)
-    #binding.pry
     get edit_admin_courseware_path(id: courseware.id)
-    assert_select "div.panel-heading", text: "课件修改"
+    #assert_select "div.panel-heading", text: "课件修改"
     assert_response :success
 
     coursefile = Rack::Test::UploadedFile.new('./test/file/test_2.txt')
