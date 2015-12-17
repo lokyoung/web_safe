@@ -12,8 +12,6 @@ class AnswersController < ApplicationController
       flash[:success] = '创建答案成功'
       # 向当前问题发布者发送通知
       create_answer_notification(@answer)
-      # 向关注者发送公告
-      #create_followers_notification @answer
       redirect_to @question
     else
       flash[:danger] = '答案不可为空'

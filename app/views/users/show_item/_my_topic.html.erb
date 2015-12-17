@@ -1,0 +1,10 @@
+<tbody>
+  <% @topics.each do |topic| %>
+    <tr>
+      <td>
+        <%= link_to topic.title, topic %>
+      </td>
+    </tr>
+  <% end %>
+  <%= paginate @topics %>
+</tbody>

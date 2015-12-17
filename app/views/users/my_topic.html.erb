@@ -1,0 +1,32 @@
+<% provide(:title, @title) %>
+<div class="row">
+  <div class="col-md-4">
+    <%= render 'user_info' %>
+  </div>
+  <div class="col-md-8">
+    <ul class="nav nav-tabs">
+    </ul>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="row">
+          <% @users.each do |user| %>
+          <div class="col-xs-4" style="min-width: 100px">
+            <div class="media">
+              <div class="media-left">
+                <%= image_tag letter_avatar_for(user.username_for_avatar, 200).sub("public/", "/"), :width => 50 %>
+              </div>
+              <div class="media-body">
+                <div class="media-heading">
+                  <%= link_to user.name, user %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <%= paginate @users %>
+          <% end %>
+        </div>
+      </div>
+      <div class="panel-footer"></div>
+    </div>
+  </div>
+</div>

@@ -18,6 +18,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @topics = @user.topics.page params[:page]
   end
 
   def create
@@ -39,16 +40,15 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    #if params[:user][:stuclass_id].present?
-      # stuclass = Stuclass.where(scname: params[:user][:sclass])
-      # stuclass << @user
-      #@user.stuclass_id = Stuclass.find_by(scname: params[:user][:stuclass_id]).id
-    #end
 
     if @user.update_attributes(user_params)
       # success
       flash[:success] = "资料修改成功"
       redirect_to @user
+      #respond_to do |format|
+        #format.html { redirect_to @user }
+        #format.js
+      #end
     else
       render 'edit'
     end
@@ -86,8 +86,20 @@ class UsersController < ApplicationController
 
   def get_my_topic
     @user = User.find params[:id]
-    @topic = @user.topics.page params[:page]
-    render 'show_my_topic'
+    @topics = @user.topics.page params[:page]
+    respond_to do |format|
+      format.html { redirect_to @user }
+      format.js
+    end
+  end
+
+  def get_my_question
+    @user = User.find params[:id]
+    @questions = @user.questions.page params[:page]
+    respond_to do |format|
+      format.html { redirect_to @user }
+      format.js
+    end
   end
 
   private

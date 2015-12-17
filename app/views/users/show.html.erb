@@ -5,7 +5,27 @@
   </div>
   <div class="col-md-8">
     <ul class="nav nav-tabs">
-      <li><%= link_to '发布的话题', get_my_topic_user_path(@user) %></li>
+      <li><%= link_to '发布的话题', get_my_topic_user_path(@user), remote: true %></li>
+      <li><%= link_to '提出的问题', get_my_question_user_path(@user), remote: true %></li>
     </ul>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="row">
+          <table class="table" id="user-item-list">
+            <tbody>
+              <% @topics.each do |topic| %>
+                <tr>
+                  <td>
+                    <%= link_to topic.title, topic %>
+                  </td>
+                </tr>
+              <% end %>
+              <%= paginate @topics %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="panel-footer"></div>
+    </div>
   </div>
 </div>
