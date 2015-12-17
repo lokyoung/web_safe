@@ -11,6 +11,8 @@ class CommentsController < ApplicationController
     @comment = @item.comments.new(comment_params.merge(user_id: current_user.id, comment_to: type))
     if @comment.save
       flash[:success] = '评论成功！'
+      create_comment_notification @comment
+      #create_followers_notification @comment
       redirect_item @item
     else
       flash[:danger] = '评论不可为空'

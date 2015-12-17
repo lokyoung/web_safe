@@ -18,7 +18,9 @@ class TopicsController < ApplicationController
     @topic = current_user.topics.new(topic_params)
     if @topic.save
       flash[:success] = '发布话题成功'
-      redirect_to topics_url
+      # 向关注者发送通知
+      create_followers_notification @topic
+      redirect_to @topic
     else
       render 'new'
     end

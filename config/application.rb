@@ -33,5 +33,8 @@ module WebSafe
       g.test_framework      :minitest, fixture_replacement: :fabrication
       g.fixture_replacement :fabrication, dir: "test/fabricators"
     end
+
+    # observer
+    #config.active_record.observers = :answer_observer
   end
 end
