@@ -19,7 +19,7 @@ class QuestionsController < ApplicationController
     if @question.save
       flash[:success] = '发布问题成功'
       #create_followers_notification @question
-      redirect_to @question
+      redirect_to questions_url
     else
       render 'new'
     end

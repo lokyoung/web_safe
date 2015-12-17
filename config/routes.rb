@@ -8,8 +8,10 @@ Rails.application.routes.draw do
 
   resources :users do
     member do
-      get :following, :followers
+      #get :following, :followers
       get :get_stuhomeworks
+      get :get_my_topic
+      get :get_my_question
     end
   end
   # 访问登录页面

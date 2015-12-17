@@ -12,18 +12,5 @@
         学号：<%= @user.sid %><br/>
       <% end %>
     </div>
-    <div class="follow-info row">
-      <div class="col-sm-6">
-        <%= link_to "#{@user.followers.count}", '#', class: :counter, id: :followers %>
-        <a class="text" href="#">关注者</a>
-      </div>
-      <div class="col-sm-6">
-        <%= link_to "#{@user.following.count}", '#', class: :counter, id: :following %>
-        <a class="text" href="#">正在关注</a>
-      </div>
-    </div>
-    <div class="buttons row">
-      <%= render 'follow_form' %>
-    </div>
   </div>
 </div>

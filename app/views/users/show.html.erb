@@ -5,8 +5,7 @@
   </div>
   <div class="col-md-8">
     <ul class="nav nav-tabs">
-      <li><%= link_to '关注者', followers_user_path(@user) %></li>
-      <li><%= link_to '正在关注', following_user_path(@user) %></li>
+      <li><%= link_to '发布的话题', get_my_topic_user_path(@user) %></li>
     </ul>
   </div>
 </div>

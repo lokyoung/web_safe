@@ -64,24 +64,30 @@ class UsersController < ApplicationController
     @stuhomeworks = current_user.stuhomeworks
   end
 
-  def following
-    @title = "关注"
-    @user = User.find(params[:id])
-    @users = @user.following.page params[:page]
-    render 'show_follow'
-  end
+  #def following
+    #@title = "关注"
+    #@user = User.find(params[:id])
+    #@users = @user.following.page params[:page]
+    #render 'show_follow'
+  #end
 
-  def followers
-    @title = "关注者"
-    @user = User.find(params[:id])
-    @users = @user.followers.page params[:page]
-    render 'show_follow'
-  end
+  #def followers
+    #@title = "关注者"
+    #@user = User.find(params[:id])
+    #@users = @user.followers.page params[:page]
+    #render 'show_follow'
+  #end
 
   def get_stuhomeworks
     @student = User.find params[:id]
     @stuhomeworks = @student.stuhomeworks.page params[:page]
     @homeworks = @student.stuclass.homeworks.page params[:page]
+  end
+
+  def get_my_topic
+    @user = User.find params[:id]
+    @topic = @user.topics.page params[:page]
+    render 'show_my_topic'
   end
 
   private

@@ -18,14 +18,14 @@ class User < ActiveRecord::Base
   has_many :comments, dependent: :destroy
 
   # 用户和关注关系
-  has_many :active_relationships, class_name: "Relationship",
-                                  foreign_key: "follower_id",
-                                  dependent: :destroy
-  has_many :passive_relationships, class_name: "Relationship",
-                                   foreign_key: "followed_id",
-                                   dependent: :destroy
-  has_many :following, through: :active_relationships, source: :followed
-  has_many :followers, through: :passive_relationships, source: :follower
+  #has_many :active_relationships, class_name: "Relationship",
+                                  #foreign_key: "follower_id",
+                                  #dependent: :destroy
+  #has_many :passive_relationships, class_name: "Relationship",
+                                   #foreign_key: "followed_id",
+                                   #dependent: :destroy
+  #has_many :following, through: :active_relationships, source: :followed
+  #has_many :followers, through: :passive_relationships, source: :follower
 
   before_save { self.email = email.downcase }
   # 方法最后一个参数为哈希，花括号可以省略
