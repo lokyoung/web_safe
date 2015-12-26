@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151210094823) do
+ActiveRecord::Schema.define(version: 20151226062313) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,22 @@ ActiveRecord::Schema.define(version: 20151210094823) do
 
   add_index "coursewares", ["user_id", "created_at"], name: "index_coursewares_on_user_id_and_created_at", using: :btree
   add_index "coursewares", ["user_id"], name: "index_coursewares_on_user_id", using: :btree
+
+  create_table "experiments", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.string   "experimentfile"
+    t.integer  "user_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "experiments", ["user_id"], name: "index_experiments_on_user_id", using: :btree
+
+  create_table "experiments_stuclasses", id: false, force: :cascade do |t|
+    t.integer "experiment_id"
+    t.integer "stuclass_id"
+  end
 
   create_table "homeworks", force: :cascade do |t|
     t.string   "title"
@@ -171,6 +187,7 @@ ActiveRecord::Schema.define(version: 20151210094823) do
   add_foreign_key "comments", "topics"
   add_foreign_key "comments", "users"
   add_foreign_key "coursewares", "users"
+  add_foreign_key "experiments", "users"
   add_foreign_key "homeworks", "users"
   add_foreign_key "notifications", "users"
   add_foreign_key "questions", "users"

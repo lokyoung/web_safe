@@ -1,0 +1,13 @@
+<% provide(:title, '实验') %>
+<div class="row">
+  <div class="col-md-9">
+    <%= render 'panel/item_list', contents: @experiments, title: '实验列表' %>
+  </div>
+  <div class="col-md-3">
+    <%= render 'panel/user_info' %>
+    <% if teacher_admin? %>
+      <%= render 'panel/new_item', content: 'experiment', title: '新增实验' %>
+    <% end %>
+    <%= render 'panel/study_resources' %>
+  </div>
+</div>

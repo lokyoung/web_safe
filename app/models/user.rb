@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   has_many :topics, dependent: :destroy
   has_many :stuhomeworks, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :experiments, dependent: :destroy
 
   # 用户和关注关系
   #has_many :active_relationships, class_name: "Relationship",

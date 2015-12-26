@@ -49,9 +49,6 @@ Rails.application.routes.draw do
 
   resources :stuclasses
 
-  # 关注关系
-  resources :relationships, only: [:create, :destroy]
-
   get 'stu_home' => 'users#stu_home'
 
   # 验证码
@@ -62,6 +59,8 @@ Rails.application.routes.draw do
 
   # 讨论话题
   resources :topics
+
+  resources :experiments
 
   # admin用户
   namespace :admin do

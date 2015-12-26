@@ -1,0 +1,31 @@
+<% provide(:title, @experiment.title) %>
+<div class="row">
+  <div class="col-md-9">
+
+    <div class="panel panel-default">
+      <%= render 'panel/author_panel', content: @experiment%>
+          <div class="panel-body">
+        <p><%= @experiment.description %></p>
+        <small>本次实验班级：</small>
+        <% @experiment.stuclasses.each do |stuclass| %>
+          <small><%= stuclass.scname %></small>
+        <% end %>
+        <br/>
+        <a href="<%= @experiment.experimentfile %>">查看实验文件</a>
+      </div>
+
+      <div class="panel-footer">
+        <div class="row">
+          <div class="col-md-12 text-right">
+            <%= render 'panel/edit_delete', item: @experiment %>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="col-md-3">
+    <%= render 'panel/user_info' %>
+  </div>
+</div>
+
