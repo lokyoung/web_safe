@@ -1,0 +1,27 @@
+<div class="panel panel-default">
+  <div class="panel-heading">实验列表</div>
+  <table class="table">
+    <tr>
+      <td>标题</td>
+      <td>描述</td>
+      <td>班级</td>
+      <td>附件</td>
+      <td>发布者</td>
+    </tr>
+    <% @experiments.each do |experiment| %>
+      <tr>
+        <td><%= experiment.title %></td>
+        <td><%= experiment.description %></td>
+        <td>
+          <% experiment.stuclasses.each do |stuclass| %>
+            <%= stuclass.scname %>
+          <% end %>
+        </td>
+        <td><%= link_to '查看附件', experiment.experimentfile.to_s %></td>
+        <td><%= experiment.user.name %></td>
+        <td><%= render 'admin/panel/edit_delete', obj: experiment %></td>
+      </tr>
+    <% end %>
+  </table>
+  <%= paginate @experiments %>
+</div>

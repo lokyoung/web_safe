@@ -1,19 +1,19 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    作业修改
+    实验修改
   </div>
   <div class="panel-body">
-    <%= form_for [:admin, @homework] do |f| %>
+    <%= form_for [:admin, @experiment] do |f| %>
       <%= f.label :title, '标题' %>
       <%= f.text_field :title, class: 'form-control' %>
       <%= f.label :decription, '描述' %>
       <%= f.text_area :description, class: 'form-control' %>
-      <%= f.label :homeworkfile, '文件' %>
-      <%= f.file_field :homeworkfile, class: 'form-control' %>
+      <%= f.label :experimentfile, '文件' %>
+      <%= f.file_field :experimentfile, class: 'form-control' %>
       <%= f.label :stuclass_ids, '班级' %>
       <%= f.collection_check_boxes :stuclass_ids, Stuclass.all, :id, :name_with_initial %><br/>
       <label>发布者</label>
-      <input class="form-control" type="text" readonly="value" value="<%= @homework.user.name %>">
+      <input class="form-control" type="text" readonly="value" value="<%= @experiment.user.name %>">
       <%= f.submit '保存修改', class: 'btn btn-primary' %>
     <% end %>
   </div>

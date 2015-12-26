@@ -96,6 +96,8 @@ Rails.application.routes.draw do
     end
     resources :stuhomeworks, only: [:edit, :update, :destroy]
     resources :comments
+
+    resources :experiments, only: [:index, :edit, :update, :destroy]
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
