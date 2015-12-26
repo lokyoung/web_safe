@@ -3,7 +3,8 @@ require 'test_helper'
 class UserLoginTest < ActionDispatch::IntegrationTest
 
   def setup
-    @user = users(:example)
+    #@user = users(:example)
+    @user = Fabricate(:student)
   end
 
   test "invalid login" do

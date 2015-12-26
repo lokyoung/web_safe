@@ -62,6 +62,8 @@ class User < ActiveRecord::Base
 
   # 记住用户
   def remember
+    # 如果没有写上self，会创建一个名为remember_token的本地变量
+    # 我们要将值赋给用户的remember_token属性，所以要写上self
     self.remember_token = User.new_token
     update_attribute(:remember_digest, User.digest(remember_token))
   end

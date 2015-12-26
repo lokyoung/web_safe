@@ -7,6 +7,7 @@ module SessionsHelper
   # 返回当前登录的用户
   def current_user
     if user_id = session[:user_id]
+      # 防止抛出异常，使用find_by
       @current_user ||= User.find_by(id: user_id)
     elsif user_id = cookies.signed[:user_id]
       user = User.find_by(id: user_id)

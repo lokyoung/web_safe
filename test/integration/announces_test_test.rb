@@ -4,9 +4,9 @@ class AnnouncesTestTest < ActionDispatch::IntegrationTest
   include ApplicationHelper
 
   def setup
-    @user_1 = users(:user_1)
-    @user_t = users(:teacher1)
-    @announce_1 = announces(:announce_1)
+    @user_1 = Fabricate(:student)
+    @user_t = Fabricate(:teacher)
+    @announce_1 = Fabricate(:announce_1)
   end
 
   test "announce list" do
@@ -63,6 +63,9 @@ class AnnouncesTestTest < ActionDispatch::IntegrationTest
   test "user can edit their own announce" do
     log_in_as @user_t
     # 访问修改页面
+    # 这里测试时会返回302而不是200，但是加入断点之后，get edit_announce_path @announce_1
+    # 返回200，之后的测试可以通过
+    # binding.pry
     get edit_announce_path @announce_1
     assert_response :success
     assert_template 'announces/edit'
@@ -86,7 +89,7 @@ class AnnouncesTestTest < ActionDispatch::IntegrationTest
     log_in_as @user_t
     assert_difference 'Announce.count', -1 do
       # delete_via_redirect announce_path id: 1
-      delete announce_path id: 1
+      delete announce_path id: @announce_1.id
     end
     #assert_response :success
     assert_redirected_to announces_url
