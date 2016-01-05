@@ -5,34 +5,30 @@
       通知
     </div>
     <% if @notifications.blank? %>
-    <div class="panel-body">暂无通知</div>
+      <div class="panel-body">暂无通知</div>
     <% else %>
-    <div class="panel-body">
-      <ul class="list-group">
-        <% @notifications.each do |notification| %>
-        <% if notification.unread? %>
-        <li class="list-group-item list-group-item-warning">
-          <% notification.update_attributes(unread: false) %>
-          <% else %>
-        <li class="list-group-item">
-          <% end %>
-          <%= raw notification.title %><br/>
-          <%= raw notification.content %>
-          <span style="float: right">
-            <%= link_to notification, method: :delete, data: { confirm: "确定要删除么？" } do %>
-            <span class="glyphicon glyphicon-trash"></span>
-            <% end %>
-          </span>
-          <% end %>
-        </li>
-      </ul>
-      <div calss="panel-footer">
-        <%= paginate @notifications %>
+      <div class="panel-body">
+        <ul class="list-group">
+          <% @notifications.each do |notification| %>
+            <% if notification.unread? %>
+              <li class="list-group-item list-group-item-warning">
+              <% else %>
+                <li class="list-group-item">
+                <% end %>
+                <%= raw notification.title %><br/>
+                <%= raw notification.content %>
+                <span style="float: right">
+                  <%= link_to notification, method: :delete, data: { confirm: "确定要删除么？" } do %>
+                    <span class="glyphicon glyphicon-trash"></span>
+                  <% end %>
+                </span>
+              <% end %>
+                </li>
+        </ul>
+        <div calss="panel-footer">
+          <%= paginate @notifications %>
+        </div>
       </div>
-    </div>
     <% end %>
-    <!-- <section id="notifications" data-channel="notices">
-      <%= render current_user.notifications %>
-    </section> -->
   </div>
 </div>

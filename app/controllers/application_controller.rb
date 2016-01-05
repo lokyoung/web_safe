@@ -61,42 +61,19 @@ class ApplicationController < ActionController::Base
   # Notification相关方法
   def create_answer_notification answer
     Notification.create(user_id: answer.question.user_id, title: "<a href=#{user_url(answer.user)}>#{answer.user.name}</a>在问题<a href=#{question_url(answer.question)}>#{answer.question.title}</a>中回复:", content: "#{answer.content}", unread: true)
-    send_notice answer.question.user
   end
 
   def create_comment_notification comment
     case comment.comment_to
     when 'Topic'
       Notification.create(user_id: comment.topic.user_id, title: "<a href=#{user_url(comment.user)}>#{comment.user.name}</a>在话题<a href=#{topic_url(comment.topic)}>#{comment.topic.title}</a>中回复:", content: "#{comment.content}", unread: true)
-      send_notice comment.topic.user
+      #send_notice comment.topic.user
     when 'Answer'
       Notification.create(user_id: comment.answer.user_id, title: "<a href=#{user_url(comment.user)}>#{comment.user.name}</a>在您对问题<a href=#{question_url(comment.answer.question)}>#{comment.answer.question.title}</a>发表的答案中评论:", content: "#{comment.content}", unread: true)
-      send_notice comment.answer.user
+      #send_notice comment.answer.user
     end
   end
 
-  #def create_followers_notification item
-    #current_user.followers.each do |user|
-      #case item.class.to_s
-      #when 'Question'
-        #Notification.create(user_id: user.id, title: "你关注的用户<a href=#{user_url(current_user)}>#{current_user.name}</a>发布新问题", content: "<a href=#{question_url(item)}>#{item.title}</a>", unread: true)
-      #when 'Answer'
-        #Notification.create(user_id: user.id, title: "你关注的用户<a href=#{user_url(current_user)}>#{current_user.name}</a>在问题<a href=#{question_url(item.question)}>#{item.question.title}</a>中回复:", content: "#{item.content}", unread: true)
-      #when 'Topic'
-        #Notification.create(user_id: user.id, title: "你关注的用户<a href=#{user_url(current_user)}>#{current_user.name}</a>发布新话题", content: "<a href=#{topic_url(item)}>#{item.title}</a>", unread: true)
-      #when 'Courseware'
-        #Notification.create(user_id: user.id, title: "你关注的用户<a href=#{user_url(current_user)}>#{current_user.name}</a>发布新课件", content: "<a href=#{courseware_url(item)}>#{item.title}</a>", unread: true)
-      #when 'Comment'
-        #case item.comment_to
-        #when 'Topic'
-          #Notification.create(user_id: user.id, title: "你关注的用户<a href=#{user_url(current_user)}>#{current_user.name}</a>在话题<a href=#{topic_url(item.topic)}>#{item.topic.title}</a>中评论:", content: "#{item.content}", unread: true)
-        #when 'Answer'
-          #Notification.create(user_id: user.id, title: "你关注的用户<a href=#{user_url(current_user)}>#{current_user.name}</a>在问题<a href=#{question_url(item.answer.question)}>#{item.answer.question.title}</a>中评论:", content: "#{item.content}", unread: true)
-        #end
-      #end
-      #send_notice user
-    #end
-  #end
 
   # 动态定义简单的index, edit, :show, :new action
   def self.normal_item(*args)
@@ -130,14 +107,6 @@ class ApplicationController < ActionController::Base
         self.send(item + "=", item.capitalize.constantize.find(params[:id]))
       }
     end
-
-    #if args.include? :destroy
-    #define_method(:destroy){
-    #item = params[:controller].singularize
-    #self.class.send(:attr_accessor, item)
-    #self.send(item + "=", item.capitalize.constantize.find(params[:id]).destroy)
-    #}
-    #end
   end
 
 end

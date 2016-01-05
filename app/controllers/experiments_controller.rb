@@ -26,8 +26,6 @@ class ExperimentsController < ApplicationController
         stuclass.students.each do |student|
           # 向当前班级的同学发出通知
           Notification.create(user_id: student.id, title: "您有新的实验", content: "<a href=#{experiment_url(@experiment)}>#{@experiment.title}</a>", unread: true)
-          # 通过ActionCable发送notice
-          send_notice student
         end
       end
 

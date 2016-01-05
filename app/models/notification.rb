@@ -4,4 +4,9 @@ class Notification < ActiveRecord::Base
   scope :unread, -> { where(unread: true) }
 
   validates_presence_of :title, :content
+  after_commit :send_notification, on: :create
+
+  def send_notification
+    NotificationBroadcastJob.perform_later self
+  end
 end

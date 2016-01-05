@@ -2,9 +2,9 @@ class NotificationsController < ApplicationController
 
   def index
     @notifications = current_user.notifications.order("created_at DESC").page params[:page]
-    # @notifications.unread.each do |notification|
-    #   notification.update_attributes(unread: false)
-    # end
+    @notifications.unread.each do |notification|
+      notification.update_attributes(unread: false)
+    end
   end
 
   def destroy
