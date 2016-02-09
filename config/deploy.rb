@@ -1,8 +1,8 @@
 require 'mina/bundler'
 require 'mina/rails'
 require 'mina/git'
-require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
-# require 'mina/rvm'    # for rvm support. (http://rvm.io)
+# require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
+require 'mina/rvm'    # for rvm support. (http://rvm.io)
 
 # Basic settings:
 #   domain       - The hostname to SSH to.
@@ -12,7 +12,7 @@ require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
 
 set :domain, '192.241.193.66'
 set :deploy_to, '/var/www/web_safe'
-set :repository, 'git@github.com:lokyoung/web_safe.git'
+set :repository, 'https://github.com/lokyoung/web_safe.git'
 set :branch, 'master'
 
 # For system-wide RVM install.
@@ -32,10 +32,10 @@ set :user, 'deploy'    # Username in the server to SSH to.
 task :environment do
   # If you're using rbenv, use this to load the rbenv environment.
   # Be sure to commit your .ruby-version or .rbenv-version to your repository.
-  invoke :'rbenv:load'
+  # invoke :'rbenv:load'
 
   # For those using RVM, use this to load an RVM version@gemset.
-  # invoke :'rvm:use[ruby-1.9.3-p125@default]'
+  invoke :'rvm:use[ruby-2.2.3@default]'
 end
 
 # Put any custom mkdir's in here for when `mina setup` is ran.
@@ -75,7 +75,7 @@ task :deploy => :environment do
     invoke :'git:clone'
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
-    
+
     invoke :'rails:db_migrate'
     invoke :'rails:assets_precompile'
     invoke :'deploy:cleanup'
