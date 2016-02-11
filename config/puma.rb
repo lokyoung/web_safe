@@ -2,7 +2,7 @@
 
 environment ENV['RAILS_ENV'] || 'production'
 
-daemonize true
+# daemonize true
 
 pidfile "/var/www/web_safe/shared/tmp/pids/puma.pid"
 stdout_redirect "/var/www/web_safe/shared/tmp/log/stdout", "/var/www/web_safe/shared/tmp/log/stderr"
