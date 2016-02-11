@@ -1,4 +1,4 @@
-#= require action_cable
+#= require cable
 #= require_self
 #= require_tree .
 
