@@ -14,6 +14,8 @@ set :domain, '192.241.193.66'
 set :deploy_to, '/var/www/web_safe'
 set :repository, 'https://github.com/lokyoung/web_safe.git'
 set :branch, 'master'
+set :app_path, lambda { "#{deploy_to}/#{current_path}" }
+set :forward_agent, true
 
 # For system-wide RVM install.
 #   set :rvm_path, '/usr/local/rvm/bin/rvm'
