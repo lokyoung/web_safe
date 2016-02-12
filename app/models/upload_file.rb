@@ -1,4 +1,4 @@
-class UploadFile < ActiveRecord::Base
+class UploadFile < ApplicationRecord
 
   def self.file_delete name
     if File.exist? name
