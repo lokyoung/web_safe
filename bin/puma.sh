@@ -1,8 +1,8 @@
 #! /bin/sh
 
-PUMA_CONFIG_FILE=/var/www/myapp/current/config/puma.rb
-PUMA_PID_FILE=/var/www/myapp/shared/tmp/pids/puma.pid
-PUMA_SOCKET=/var/www/myapp/shared/tmp/sockets/puma.sock
+PUMA_CONFIG_FILE=/var/www/web_safe/current/config/puma.rb
+PUMA_PID_FILE=/var/www/web_safe/shared/tmp/pids/puma.pid
+PUMA_SOCKET=/var/www/web_safe/shared/tmp/sockets/puma.sock
 
 # check if puma process is running
 puma_is_running() {
