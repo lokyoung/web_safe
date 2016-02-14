@@ -7,7 +7,7 @@ development: &development
 test: *development
 
 production: &production
-  :url: redis://localhost:6381
+  :url: redis://localhost:6379
   :host: localhost
-  :port: 6381
+  :port: 6379
   :timeout: 1
