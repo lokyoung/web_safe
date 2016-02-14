@@ -40,7 +40,5 @@ module WebSafe
 
     # RAILS 5 UPDATE
     ActiveSupport.halt_callback_chains_on_return_false = false
-
-    config.action_cable.disable_request_forgery_protection = true
   end
 end
