@@ -24,6 +24,7 @@ module WebSafe
     config.active_record.raise_in_transactional_callbacks = true
     LetterAvatar.setup do |config|
       config.cache_base_path = 'public/system/lets' # default is 'public/system'
+      config.colors_palette = :iwanthue
     end
 
     # 处理AJAX兼容
@@ -36,5 +37,8 @@ module WebSafe
 
     # observer
     #config.active_record.observers = :answer_observer
+
+    # RAILS 5 UPDATE
+    ActiveSupport.halt_callback_chains_on_return_false = false
   end
 end

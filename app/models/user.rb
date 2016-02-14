@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   include LetterAvatar::AvatarHelper
 
   attr_accessor :remember_token

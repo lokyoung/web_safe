@@ -1,4 +1,4 @@
-class Homework < ActiveRecord::Base
+class Homework < ApplicationRecord
   belongs_to :user
   has_many :stuhomeworks, dependent: :destroy
   mount_uploader :homeworkfile, HomeworkfileUploader
