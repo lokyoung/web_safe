@@ -65,7 +65,7 @@ Rails.application.routes.draw do
 
   # admin用户
   namespace :admin do
-    root 'pages#index'
+    root to: 'pages#index', as: 'root'
     resources :users, only: [:index, :edit, :update, :destroy]
     resources :announces, only: [:index, :edit, :update, :destroy]
     resources :coursewares, only: [:index, :edit, :update, :destroy]
