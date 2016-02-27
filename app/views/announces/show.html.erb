@@ -8,7 +8,7 @@
       <%= render 'panel/author_panel', content: @announce %>
 
       <div class="panel-body">
-        <p><%= @announce.content %></p>
+        <p><%= sanitize @announce.content %></p>
       </div>
 
       <div class="panel-footer">

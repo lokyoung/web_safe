@@ -8,7 +8,7 @@
     <%= f.label :title, '公告标题' %>
     <%= f.text_field :title, class: 'form-control' %>
     <%= f.label :content, '公告内容' %>
-    <%= f.text_area :content, class: 'form-control' %>
+    <%= f.text_area :content, class: 'form-control', id: 'sim-editor' %>
     <%= f.submit "保存修改", class: "btn btn-primary" %>
     <% end %>
 
@@ -17,3 +17,4 @@
     <%= render 'panel/user_info' %>
   </div>
 </div>
+<%= render 'layouts/simditor' %>

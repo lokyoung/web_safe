@@ -9,7 +9,7 @@
     <% @announces.each do |announce| %>
       <tr>
         <td><%= announce.title %></td>
-        <td><%= announce.content %></td>
+        <td><%= sanitize announce.content %></td>
         <td><%= announce.user.name %></td>
         <td><%= render 'admin/panel/edit_delete', obj: announce %></td>
       </tr>

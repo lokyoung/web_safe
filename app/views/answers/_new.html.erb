@@ -7,7 +7,7 @@
     <%= render "shared/error_messages", object: @answer %>
     <div class="form-group ui-widget">
       <div>
-        <%= f.text_area :content, rows: 5, placeholder: '说点什么...', class: 'form-control', id: "tags", 'question-id': @question.id.to_s %>
+        <%= f.text_area :content, rows: 5, class: 'form-control', id: "sim-editor", 'question-id': @question.id.to_s %>
       </div>
     </div>
 
@@ -20,3 +20,4 @@
     <% end %>
   </div>
 </div>
+<%= render 'layouts/simditor' %>

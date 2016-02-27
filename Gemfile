@@ -40,6 +40,8 @@ gem 'bcrypt'
 # gem 'capistrano-rails', group: :development
 # 文件上传功能
 gem 'carrierwave'
+# simditor
+gem 'simditor'
 
 # letter_avatar头像
 gem 'letter_avatar'

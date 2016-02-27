@@ -3,9 +3,11 @@
   <head>
     <title><%= full_title(yield(:title)) %></title>
 <!---引用application.css-->
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <!-- <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %> -->
+    <%= stylesheet_link_tag    'application', media: 'all' %>
 <!--引用application.js-->
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <!-- <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %> -->
+    <%= javascript_include_tag 'application' %>
 <!--避免跨站请求(CSRF)伪造攻击-->
     <%= csrf_meta_tags %>
     <!--[if lt IE 9]> <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js"> </script> <![endif]-->
@@ -29,6 +31,5 @@
       <%= render 'layouts/footer' %>
       <%= debug(params) if Rails.env.development? %>
     </div>
-
   </body>
 </html>

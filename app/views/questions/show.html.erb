@@ -4,7 +4,7 @@
     <div class="panel panel-default">
      <%= render 'panel/author_panel', content: @question %>
       <div class="panel-body">
-        <p><%= @question.content %></p>
+        <p><%= sanitize @question.content %></p>
       </div>
       <div class="panel-footer">
         <div class="row">

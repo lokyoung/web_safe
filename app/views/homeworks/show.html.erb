@@ -5,7 +5,7 @@
     <div class="panel panel-default">
       <%= render 'panel/author_panel', content: @homework %>
           <div class="panel-body">
-        <p><%= @homework.description %></p>
+        <p><%= sanitize @homework.description %></p>
         <small>本次作业班级：</small>
         <% @homework.stuclasses.each do |stuclass| %>
           <small><%= stuclass.scname %></small>

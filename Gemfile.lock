@@ -7,6 +7,14 @@ GIT
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
 
+GIT
+  remote: git://github.com/javyliu/rails_kindeditor.git
+  revision: 611d26652a734e290bf8fe71be4ebd7d61246a2d
+  specs:
+    rails_kindeditor (0.4.6)
+      carrierwave
+      mini_magick
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -106,6 +114,7 @@ GEM
       mime-types (>= 1.16, < 3)
     method_source (0.8.2)
     mime-types (2.99)
+    mini_magick (4.4.0)
     mini_portile2 (2.0.0)
     minitest (5.8.4)
     multi_json (1.11.2)
@@ -165,6 +174,7 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    simditor (2.3.6)
     slop (3.6.0)
     spring (1.6.3)
     sprockets (3.5.2)
@@ -215,10 +225,12 @@ DEPENDENCIES
   pry
   puma
   rails (= 5.0.0.beta2)
+  rails_kindeditor!
   redis
   rucaptcha
   sass-rails
   sdoc
+  simditor
   spring
   turbolinks
   uglifier
