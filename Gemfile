@@ -41,7 +41,6 @@ gem 'bcrypt'
 # 文件上传功能
 gem 'carrierwave'
 # kindeditor
-gem 'rails_kindeditor', github: 'javyliu/rails_kindeditor'
 gem 'simditor'
 
 # letter_avatar头像
