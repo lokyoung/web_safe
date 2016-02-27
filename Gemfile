@@ -40,7 +40,8 @@ gem 'bcrypt'
 # gem 'capistrano-rails', group: :development
 # 文件上传功能
 gem 'carrierwave'
-# simditor
+# kindeditor
+gem 'rails_kindeditor', github: 'javyliu/rails_kindeditor'
 gem 'simditor'
 
 # letter_avatar头像
