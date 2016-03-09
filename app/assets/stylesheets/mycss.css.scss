@@ -222,6 +222,14 @@ a {
 .post-comment{
   font-size: 12px;
 }
+
+.notification-content {
+  display: inline;
+  p {
+    width: 90%;
+    display: inherit;
+  }
+}
 /*复选框*/
 // .checkbox {
 //   margin-top: -10px;

@@ -16,12 +16,14 @@
                 <li class="list-group-item">
                 <% end %>
                 <%= raw notification.title %><br/>
-                <%= raw notification.content %>
-                <span style="float: right">
+                <div class="notification-content">
+                  <%= raw notification.content %>
+                </div>
+                <div style="float: right">
                   <%= link_to notification, method: :delete, data: { confirm: "确定要删除么？" } do %>
                     <span class="glyphicon glyphicon-trash"></span>
                   <% end %>
-                </span>
+                </div>
               <% end %>
                 </li>
         </ul>
