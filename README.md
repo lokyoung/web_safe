@@ -8,6 +8,7 @@ This is the source code of my web_safe site.
 * Rails 4.2.5 +
 * Redis 2.2 +
 * Postgresql, Mysql or sqlite3
+* ImageMagick 6.5+
 
 ## Install in development
 
@@ -20,15 +21,26 @@ $ brew install postgresql
 $ brew install imagemagic
 ```
 
+### Ubuntu
+```sh
+$ apt-get install redis
+$ apt-get install postgresql
+$ apt-get install imagemagic
+```
+
 ## 运行项目
 ```sh
+$ git clone git@github.com:lokyoung/web_safe.git
+$ cd web_safe
 $ bundle install
-$ rake db:migrate
-$ rails server
-$ bin/cable
+$ ./bin/rake db:migrate
+$ ./bin/rails server
 ```
 
 ## 运行测试
 ```sh
 $ rake test
 ```
+
+## Sites
+* [花椒网安](http://hj-websafe.com)
