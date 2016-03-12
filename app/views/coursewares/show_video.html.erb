@@ -5,7 +5,7 @@
     <div class="panel panel-default">
       <%= render 'panel/author_panel', content: @courseware %>
       <div class="panel-body">
-        <p><%= @courseware.description %></p>
+        <p><%= sanitize @courseware.description %></p>
         <video width="800" src=<%= "#{@courseware.coursefile}" %> controls="controls"></video>
       </div>
 

@@ -19,7 +19,7 @@
             <%= Stuclass.find(stuhomework.user.stuclass_id).scname %>
           <% end %>
         </td>
-        <td><%= stuhomework.ischecked %></td>
+        <td><%= stuhomework.ischecked ? '是' : '否' %></td>
         <td><%= stuhomework.mark %></td>
         <% if teacher_admin? %>
           <td><a href="#{<%= stuhomework.stuhomeworkfile %>}">下载作业</a></td>
