@@ -11,7 +11,7 @@
     <% @questions.each do |question| %>
       <tr>
         <td><%= question.title %></td>
-        <td><%= question.content %></td>
+        <td><%= sanitize question.content %></td>
         <td><%= question.user.name %></td>
         <td><%= link_to '点击查看', admin_question_answers_path(question) %></td>
         <td><%= question.issolved ? '是' : '否' %></td>

@@ -10,7 +10,7 @@
     <% @topics.each do |topic| %>
       <tr>
         <td><%= topic.title %></td>
-        <td><%= topic.content %></td>
+        <td><%= sanitize topic.content %></td>
         <td><%= topic.user.name %></td>
         <td><%= link_to '点击查看', show_comments_admin_topic_path(topic) %></td>
         <td><%= render 'admin/panel/edit_delete', obj: topic %></td>

@@ -7,7 +7,7 @@
     </tr>
     <% @comments.each do |comments| %>
       <tr>
-        <td><%= comments.content %></td>
+        <td><%= sanitize comments.content %></td>
         <td><%= comments.user.name %></td>
         <td><%= render 'admin/panel/edit_delete', obj: comments %></td>
       </tr>
@@ -15,4 +15,3 @@
   </table>
   <%= paginate @comments %>
 </div>
-

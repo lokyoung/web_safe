@@ -11,7 +11,7 @@
     <% @experiments.each do |experiment| %>
       <tr>
         <td><%= experiment.title %></td>
-        <td><%= experiment.description %></td>
+        <td><%= sanitize xperiment.description %></td>
         <td>
           <% experiment.stuclasses.each do |stuclass| %>
             <%= stuclass.scname %>

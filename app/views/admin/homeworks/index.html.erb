@@ -12,7 +12,7 @@
     <% @homeworks.each do |homework| %>
       <tr>
         <td><%= homework.title %></td>
-        <td><%= homework.description %></td>
+        <td><%= sanitize homework.description %></td>
         <td>
           <% homework.stuclasses.each do |stuclass| %>
             <%= stuclass.scname %>

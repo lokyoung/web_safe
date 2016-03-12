@@ -10,7 +10,7 @@
     <% @coursewares.each do |courseware| %>
       <tr>
         <td><%= courseware.title %></td>
-        <td><%= courseware.description %></td>
+        <td><%= sanitize courseware.description %></td>
         <td><%= link_to '查看附件', courseware.coursefile.to_s %></td>
         <td><%= courseware.user.name %></td>
         <td><%= render 'admin/panel/edit_delete', obj: courseware %></td>
