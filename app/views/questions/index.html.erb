@@ -17,6 +17,17 @@
             [未解决]
           <% end %>
           <%= link_to question.title, question %>
+          <% if current_user == question.user %>
+            <span style="float: right">
+              <%= link_to edit_question_path(question) do %>
+                <span class="glyphicon glyphicon-pencil"></span>
+              <% end %>
+              |
+              <%= link_to question, method: :delete, data: { confirm: "确定要删除么？" } do %>
+                <span class="glyphicon glyphicon-trash"></span>
+              <% end %>
+            </span>
+          <% end %>
           </li>
         <% end %>
       </ul>
