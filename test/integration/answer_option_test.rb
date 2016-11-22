@@ -15,12 +15,12 @@ class AnswerOptionTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_template 'questions/show'
     assert_difference 'Answer.count', 1 do
-      post_via_redirect question_answers_path(question_id: 1), answer: { content: 'hah' }
+      post_via_redirect question_answers_path(question_id: 1), params: { answer: { content: 'hah' } }
     end
     assert_equal '创建答案成功', flash[:success]
     assert_template 'questions/show'
     assert_no_difference 'Answer.count' do
-      post question_answers_path(question_id: 1), answer: { content: '' }
+      post question_answers_path(question_id: 1), params: { answer: { content: '' } }
     end
     assert_equal '答案不可为空', flash[:danger]
   end

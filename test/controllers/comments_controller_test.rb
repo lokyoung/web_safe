@@ -8,6 +8,6 @@ class CommentsControllerTest < ActionController::TestCase
 
   test "edit" do
     log_in_as @user_1
-    patch :update, { id: 1, comment: { content: "edit!" } }
+    patch :update, params: { id: 1, comment: { content: "edit!" } }
   end
 end

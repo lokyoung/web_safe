@@ -15,9 +15,9 @@ class AdminFilemodelTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     coursefile = Rack::Test::UploadedFile.new('./test/file/test_2.txt')
-    patch admin_courseware_path(id: courseware.id), courseware: { title: "update course",
+    patch admin_courseware_path(id: courseware.id), params: { courseware: { title: "update course",
                                                       description: "hah",
-                                                      coursefile: coursefile }
+                                                      coursefile: coursefile } }
     #courseware.reload
     #assert_equal 'update course', courseware.title
     #assert_equal courseware[:coursefile], 'test_2.txt'
@@ -38,9 +38,9 @@ class AdminFilemodelTest < ActionDispatch::IntegrationTest
     assert_select "div.panel-heading", text: "作业修改"
     assert_response :success
 
-    patch admin_homework_path(id: homework.id), homework: { title: "update homework",
+    patch admin_homework_path(id: homework.id), params: { homework: { title: "update homework",
                                                   description: "hah",
-                                                  homeworkfile: Rack::Test::UploadedFile.new('./test/file/test_2.txt') }
+                                                  homeworkfile: Rack::Test::UploadedFile.new('./test/file/test_2.txt') } }
     homework.reload
     assert_equal 'update homework', homework.title
     assert_equal 'hah', homework.description
@@ -61,12 +61,12 @@ class AdminFilemodelTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     assert_equal 'test.txt', stuhomework[:stuhomeworkfile]
-    patch admin_stuhomework_path(id: stuhomework.id), stuhomework: { stuhomeworkfile: Rack::Test::UploadedFile.new('./test/file/test_e.txt') }
+    patch admin_stuhomework_path(id: stuhomework.id), params: { stuhomework: { stuhomeworkfile: Rack::Test::UploadedFile.new('./test/file/test_e.txt') } }
     stuhomework.reload
     assert_equal 'test_e.txt', stuhomework[:stuhomeworkfile]
     assert_redirected_to admin_homework_stuhomeworks_url(homework_id: stuhomework.homework.id)
 
-    patch admin_stuhomework_path(id: stuhomework.id), stuhomework: { ischecked: true, mark: 100, remark: 'great' }
+    patch admin_stuhomework_path(id: stuhomework.id), params: { stuhomework: { ischecked: true, mark: 100, remark: 'great' } }
     stuhomework.reload
     assert_equal stuhomework.ischecked, true
     assert_redirected_to admin_homework_stuhomeworks_url(homework_id: stuhomework.homework.id)

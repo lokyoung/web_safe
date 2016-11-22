@@ -12,7 +12,7 @@ class HomeworkOptionsTest < ActionDispatch::IntegrationTest
   test "can not create unless teacher" do
     log_in_as(@user1)
     assert_no_difference 'Homework.count' do
-      post homeworks_path, homework: { title: 'hah', description: 'this is a des', homeworkfile: Rack::Test::UploadedFile.new('./test/file/test.txt') }
+      post homeworks_path, params: { homework: { title: 'hah', description: 'this is a des', homeworkfile: Rack::Test::UploadedFile.new('./test/file/test.txt') } }
     end
     assert_redirected_to root_url
   end
@@ -20,7 +20,7 @@ class HomeworkOptionsTest < ActionDispatch::IntegrationTest
   test "teacher can create destroy and update" do
     log_in_as(@user2)
     assert_difference 'Homework.count', 1 do
-      post homeworks_path, homework: { title: 'hah', description: 'this is a des', homeworkfile: Rack::Test::UploadedFile.new('./test/file/test.txt') }
+      post homeworks_path, params: { homework: { title: 'hah', description: 'this is a des', homeworkfile: Rack::Test::UploadedFile.new('./test/file/test.txt') } }
     end
     assert_redirected_to homeworks_url
   end
@@ -30,9 +30,9 @@ class HomeworkOptionsTest < ActionDispatch::IntegrationTest
     title = 'update title'
     description = 'update description'
     homeworkfile = Rack::Test::UploadedFile.new('./test/file/test_1.txt')
-    patch homework_path @homework, homework: { title: title,
+    patch homework_path @homework, params: { homework: { title: title,
                                                description: description,
-                                               homeworkfile: homeworkfile }
+                                               homeworkfile: homeworkfile } }
     assert_redirected_to @homework
     @homework.reload
     assert_equal @homework.title, title
@@ -51,7 +51,7 @@ class HomeworkOptionsTest < ActionDispatch::IntegrationTest
   test "admin can create and destroy" do
     log_in_as(@user3)
     assert_difference 'Homework.count', 1 do
-      post homeworks_path, homework: { title: 'hah', description: 'this is a des', homeworkfile: Rack::Test::UploadedFile.new('./test/file/test.txt') }
+      post homeworks_path, params: { homework: { title: 'hah', description: 'this is a des', homeworkfile: Rack::Test::UploadedFile.new('./test/file/test.txt') } }
     end
     assert_redirected_to homeworks_url
     assert_difference 'Homework.count', -1 do
@@ -62,11 +62,11 @@ class HomeworkOptionsTest < ActionDispatch::IntegrationTest
   test "create fail" do
     log_in_as(@user3)
     assert_no_difference 'Homework.count' do
-      post homeworks_path, homework: { title: '', description: "test", homeworkfile: "123" }
+      post homeworks_path, params: { homework: { title: '', description: "test", homeworkfile: "123" } }
     end
     assert_template 'homeworks/new'
     assert_no_difference 'Homework.count' do
-      post homeworks_path, homework: { title: '123', description: "", homeworkfile: "123" }
+      post homeworks_path, params: { homework: { title: '123', description: "", homeworkfile: "123" } }
     end
     assert_template 'homeworks/new'
   end
@@ -77,9 +77,9 @@ class HomeworkOptionsTest < ActionDispatch::IntegrationTest
     description = 'update description'
     homeworkfile = Rack::Test::UploadedFile.new('./test/file/test_1.txt')
     #binding.pry
-    patch homework_path @homework_1, homework: { title: title,
+    patch homework_path @homework_1, params: { homework: { title: title,
                                                  description: description,
-                                                 homeworkfile: homeworkfile }
+                                                 homeworkfile: homeworkfile } }
     assert_redirected_to root_url
   end
 
@@ -99,9 +99,9 @@ class HomeworkOptionsTest < ActionDispatch::IntegrationTest
     #binding.pry
     #homework = Homework.create user_id: @user3.id, title: "test", description: "ok", homeworkfile: Rack::Test::UploadedFile.new('./test/file/test.txt')
     homework = Fabricate(:homework)
-    patch homework_path homework, homework: { title: title,
+    patch homework_path homework, params: { homework: { title: title,
                                               description: description,
-                                              homeworkfile: homeworkfile }
+                                              homeworkfile: homeworkfile } }
     assert_redirected_to homework
     homework.reload
     assert_equal homework.title, title

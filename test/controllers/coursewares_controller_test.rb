@@ -12,7 +12,7 @@ class CoursewaresControllerTest < ActionController::TestCase
   test "student can not create" do
     log_in_as(@user1)
     assert_no_difference 'Courseware.count' do
-      post :create, courseware: { title: 'hah', description: 'this is a des', coursefile: Rack::Test::UploadedFile.new('./test/file/test.txt') }
+      post :create, params: { courseware: { title: 'hah', description: 'this is a des', coursefile: Rack::Test::UploadedFile.new('./test/file/test.txt') } }
     end
     assert_redirected_to root_url
   end
@@ -20,7 +20,7 @@ class CoursewaresControllerTest < ActionController::TestCase
   test "teacher can create courseware" do
     log_in_as(@user2)
     assert_difference 'Courseware.count', 1 do
-      post :create, courseware: { title: 'hah', description: 'this is a des', coursefile: fixture_file_upload('file/test.txt') }
+      post :create, params: { courseware: { title: 'hah', description: 'this is a des', coursefile: fixture_file_upload('file/test.txt') } }
     end
     assert_redirected_to coursewares_url
   end
@@ -31,9 +31,9 @@ class CoursewaresControllerTest < ActionController::TestCase
     description = 'update description'
     coursefile = fixture_file_upload('file/test_1.txt')
     #binding.pry
-    patch :update, id: @courseware.id, courseware: { title: title,
+    patch :update, params: { id: @courseware.id, courseware: { title: title,
                                                      description: description,
-                                                     coursefile: coursefile }
+                                                     coursefile: coursefile } }
     assert_redirected_to coursewares_url
     @courseware.reload
     assert_equal @courseware.title, title
@@ -43,29 +43,29 @@ class CoursewaresControllerTest < ActionController::TestCase
   test "teacher can destory" do
     log_in_as @user2
     assert_difference 'Courseware.count', -1 do
-      delete :destroy, id: @courseware.id
+      delete :destroy, params: { id: @courseware.id }
     end
   end
 
   test "admin can create and destroy" do
     log_in_as(@user3)
     assert_difference 'Courseware.count', 1 do
-      post :create, courseware: { title: 'hah', description: 'this is a des', coursefile: fixture_file_upload('file/test.txt') }
+      post :create, params: { courseware: { title: 'hah', description: 'this is a des', coursefile: fixture_file_upload('file/test.txt') } }
     end
     assert_redirected_to coursewares_url
     assert_difference 'Courseware.count', -1 do
-      delete :destroy, id: @courseware.id
+      delete :destroy, params: { id: @courseware.id }
     end
   end
 
   test "create fail" do
     log_in_as(@user3)
     assert_no_difference 'Courseware.count' do
-      post :create, courseware: { title: '', description: "test", coursefile: "123" }
+      post :create, params: { courseware: { title: '', description: "test", coursefile: "123" } }
     end
     assert_template 'coursewares/new'
     assert_no_difference 'Courseware.count' do
-      post :create, courseware: { title: '123', description: "", coursefile: "123" }
+      post :create, params: { courseware: { title: '123', description: "", coursefile: "123" } }
     end
     assert_template 'coursewares/new'
   end
@@ -76,9 +76,9 @@ class CoursewaresControllerTest < ActionController::TestCase
     description = 'update description'
     coursefile = fixture_file_upload('file/test_1.txt')
     #binding.pry
-    patch :update, id: @courseware_1.id, courseware: { title: title,
+    patch :update, params: { id: @courseware_1.id, courseware: { title: title,
                                                      description: description,
-                                                     coursefile: coursefile }
+                                                     coursefile: coursefile } }
     assert_redirected_to root_url
   end
 
@@ -88,9 +88,9 @@ class CoursewaresControllerTest < ActionController::TestCase
     description = 'update description'
     coursefile = fixture_file_upload('file/test_2.txt')
     #binding.pry
-    patch :update, id: @courseware.id, courseware: { title: title,
+    patch :update, params: { id: @courseware.id, courseware: { title: title,
                                                      description: description,
-                                                     coursefile: coursefile }
+                                                     coursefile: coursefile } }
     assert_redirected_to coursewares_url
     @courseware.reload
     assert_equal @courseware.title, title

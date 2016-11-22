@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '5.0.0.beta2'
+gem 'rails', '5.0.0'
 # gem 'rails', '4.2.5'
 # gem 'actioncable', github: 'rails/actioncable', branch: 'archive'
 # gem 'actioncable'
@@ -49,7 +49,7 @@ gem 'letter_avatar'
 # 拼音
 gem 'chinese_pinyin'
 # kaminari分页
-gem 'kaminari', :git => "git://github.com/amatsuda/kaminari.git", :branch => 'master'
+gem 'kaminari'
 # 验证码
 gem 'rucaptcha'
 # 使用puma服务器
@@ -71,17 +71,19 @@ group :development, :test do
 end
 
 group :test do
-  # gem 'minitest-reporters'
-  # gem 'mini_backtrace'
-  # gem 'guard'
-  # gem 'guard-minitest'
-  # gem 'minitest-rails-capybara'
+  gem 'minitest-reporters'
+  gem 'mini_backtrace'
+  gem 'guard'
+  gem 'guard-minitest'
+  gem 'rails-controller-testing'
+  # can not use in rails 5
+  # em 'minitest-rails-capybara'
 end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console'
-  # User Postgresql as the database for ActiveRecord
+  # Use Postgresql as the database for ActiveRecord
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end

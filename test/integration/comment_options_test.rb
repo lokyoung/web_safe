@@ -12,13 +12,13 @@ class CommentOptionsTest < ActionDispatch::IntegrationTest
     log_in_as @user_1
     # 对话题进行评论
     assert_difference 'Comment.count', 1 do
-      post comments_path, type: 'topic', topic_id: 1, comment: { content: 'comment' }
+      post comments_path, params: { type: 'topic', topic_id: 1, comment: { content: 'comment' } }
     end
     assert_equal '评论成功！', flash[:success]
     assert_redirected_to topic_url id: 1
 
     assert_no_difference 'Comment.count' do
-      post comments_path, type: 'topic', topic_id: 1, comment: { content: '' }
+      post comments_path, params: { type: 'topic', topic_id: 1, comment: { content: '' } }
     end
     assert_equal '评论不可为空', flash[:danger]
     assert_redirected_to topic_url id: 1
@@ -28,13 +28,13 @@ class CommentOptionsTest < ActionDispatch::IntegrationTest
     log_in_as @user_1
     # 对答案进行评论
     assert_difference 'Comment.count', 1 do
-      post comments_path, type: 'answer', answer_id: 1, comment: { content: 'comment' }
+      post comments_path, params: { type: 'answer', answer_id: 1, comment: { content: 'comment' } }
     end
     assert_equal '评论成功！', flash[:success]
     assert_redirected_to question_url Answer.find(1).question
 
     assert_no_difference 'Comment.count' do
-      post comments_path, type: 'answer', answer_id: 1, comment: { content: '' }
+      post comments_path, params: { type: 'answer', answer_id: 1, comment: { content: '' } }
     end
     assert_equal '评论不可为空', flash[:danger]
     assert_redirected_to question_url Answer.find(1).question
@@ -42,13 +42,13 @@ class CommentOptionsTest < ActionDispatch::IntegrationTest
 
   test "edit, destroy test" do
     log_in_as @user_1
-    patch comment_path @comment_1, comment: { content: 'content1' }
+    patch comment_path @comment_1, params: { comment: { content: 'content1' } }
     assert_redirected_to topic_path @comment_1.topic
 
-    patch comment_path @comment_1, comment: { content: '' }
+    patch comment_path @comment_1, params: { comment: { content: '' } }
     assert_template 'comments/edit'
 
-    patch comment_path @comment_2, comment: { content: 'content2' }
+    patch comment_path @comment_2, params: { comment: { content: 'content2' } }
     assert_redirected_to root_path
     assert_equal '请不要尝试修改他人的内容', flash[:warning]
 
@@ -62,7 +62,7 @@ class CommentOptionsTest < ActionDispatch::IntegrationTest
 
   test "admin can edit others comment" do
     log_in_as @user_a
-    patch comment_path @comment_2, comment: { content: 'content edit' }
+    patch comment_path @comment_2, params: { comment: { content: 'content edit' } }
     @comment_2.reload
     assert_equal @comment_2.content, 'content edit'
     assert_redirected_to topic_path @comment_2.topic

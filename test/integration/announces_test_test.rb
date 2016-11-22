@@ -34,12 +34,12 @@ class AnnouncesTestTest < ActionDispatch::IntegrationTest
   test "student can not do some options on announce" do
     log_in_as @user_1
 
-    post announces_path, announce: { title: "new", content: "haha" }
+    post announces_path, params: { announce: { title: "new", content: "haha" } }
     assert_redirected_to root_url
     get edit_announce_path @announce_1
     assert_redirected_to root_url
 
-    patch announce_path @announce_1, announce: { title: "update", content: "update" }
+    patch announce_path @announce_1, params: { announce: { title: "update", content: "update" } }
     assert_redirected_to root_url
   end
 
@@ -54,7 +54,7 @@ class AnnouncesTestTest < ActionDispatch::IntegrationTest
     assert_select 'title', full_title('发布公告')
 
     assert_difference 'Announce.count', 1 do
-      post_via_redirect announces_path, announce: { title: "new", content: "haha" }
+      post_via_redirect announces_path, params: { announce: { title: "new", content: "haha" } }
     end
     assert_equal '发布公告成功！', flash[:success]
     assert_select 'title', full_title('首页')
@@ -72,7 +72,7 @@ class AnnouncesTestTest < ActionDispatch::IntegrationTest
     assert_select 'title', full_title('公告修改')
 
     # 有效修改
-    patch announce_path @announce_1, announce: { title: "update", content: "update" }
+    patch announce_path @announce_1, params: { announce: { title: "update", content: "update" } }
     assert_redirected_to @announce_1
     @announce_1.reload
     assert_equal "update", @announce_1.title
@@ -81,7 +81,7 @@ class AnnouncesTestTest < ActionDispatch::IntegrationTest
     assert_equal "update1", @announce_1.title
 
     # 无效修改
-    patch announce_path @announce_1, announce: { title: "", content: "update" }
+    patch announce_path @announce_1, params: { announce: { title: "", content: "update" } }
     assert_template 'announces/edit'
   end
 

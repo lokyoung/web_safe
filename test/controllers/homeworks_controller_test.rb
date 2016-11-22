@@ -13,7 +13,7 @@ class HomeworksControllerTest < ActionController::TestCase
   test "can not create unless teacher" do
     log_in_as(@user1)
     assert_no_difference 'Homework.count' do
-      post :create, homework: { title: 'hah', description: 'this is a des', homeworkfile: '123' }
+      post :create, params: { homework: { title: 'hah', description: 'this is a des', homeworkfile: '123' } }
     end
     assert_redirected_to root_url
   end
@@ -21,21 +21,21 @@ class HomeworksControllerTest < ActionController::TestCase
   test "teacher can create and destroy but can't edit destroy others" do
     log_in_as(@user2)
     assert_difference 'Homework.count', 1 do
-      post :create, homework: { title: 'hah', description: 'this is a des', homeworkfile: Rack::Test::UploadedFile.new('./test/file/test_1.txt') }
+      post :create, params: { homework: { title: 'hah', description: 'this is a des', homeworkfile: Rack::Test::UploadedFile.new('./test/file/test_1.txt') } }
     end
     assert_redirected_to homeworks_url
 
     assert_difference 'Homework.count', -1 do
-      delete :destroy, id: 1
+      delete :destroy, params: { id: 1 }
     end
 
     title = 'update title'
     description = 'update description'
     homeworkfile = Rack::Test::UploadedFile.new('./test/file/test_1.txt')
     #binding.pry
-    patch :update, id: @homework.id, homework: { title: title,
+    patch :update, params: { id: @homework.id, homework: { title: title,
                                                description: description,
-                                               homeworkfile: homeworkfile }
+                                               homeworkfile: homeworkfile } }
     assert_redirected_to @homework
     @homework.reload
     #binding.pry
@@ -44,12 +44,12 @@ class HomeworksControllerTest < ActionController::TestCase
     assert_equal @homework[:homeworkfile], "test_1.txt"
 
     assert_no_difference 'Homework.count' do
-      delete :destroy, id: 2
+      delete :destroy, params: { id: 2 }
     end
 
-    patch :update, id: @homework_2.id, homework: { title: title,
+    patch :update, params: { id: @homework_2.id, homework: { title: title,
                                                  description: description,
-                                                 homeworkfile: homeworkfile }
+                                                 homeworkfile: homeworkfile } }
     assert_redirected_to root_url
     assert_equal '请不要尝试修改他人的内容', flash[:warning]
   end
@@ -57,16 +57,16 @@ class HomeworksControllerTest < ActionController::TestCase
   test "admin can create and destroy" do
     log_in_as(@user3)
     assert_difference 'Homework.count', 1 do
-      post :create, homework: { title: 'hah', description: 'this is a des', homeworkfile: Rack::Test::UploadedFile.new('./test/file/test_1.txt') }
+      post :create, params: { homework: { title: 'hah', description: 'this is a des', homeworkfile: Rack::Test::UploadedFile.new('./test/file/test_1.txt') } }
     end
     assert_redirected_to homeworks_url
 
     title = 'update title'
     description = 'update description'
     homeworkfile = fixture_file_upload('file/test_1.txt')
-    patch :update, id: @homework_2.id, homework: { title: title,
+    patch :update, params: { id: @homework_2.id, homework: { title: title,
                                               description: description,
-                                              homeworkfile: homeworkfile }
+                                              homeworkfile: homeworkfile } }
     assert_redirected_to @homework_2
     @homework_2.reload
     assert_equal @homework_2.title, title
@@ -75,7 +75,7 @@ class HomeworksControllerTest < ActionController::TestCase
 
 
     assert_difference 'Homework.count', -1 do
-      delete :destroy, id: 2
+      delete :destroy, params: { id: 2 }
     end
   end
 

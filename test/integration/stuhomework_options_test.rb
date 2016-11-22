@@ -15,7 +15,7 @@ class StuhomeworkOptionsTest < ActionDispatch::IntegrationTest
     log_in_as @user_1
     stuhomeworkfile = Rack::Test::UploadedFile.new('./test/file/test.txt')
     # stuhomework_path方法需要加上括号
-    patch stuhomework_path(@stuhomework_1), stuhomework: { stuhomeworkfile: stuhomeworkfile }
+    patch stuhomework_path(@stuhomework_1), params: { stuhomework: { stuhomeworkfile: stuhomeworkfile } }
     assert_redirected_to @stuhomework_1.homework
     @stuhomework_1.reload
     assert_equal @stuhomework_1[:stuhomeworkfile], "test.txt"
@@ -23,7 +23,7 @@ class StuhomeworkOptionsTest < ActionDispatch::IntegrationTest
     stuhomeworkfile1 = Rack::Test::UploadedFile.new('./test/file/test_2.txt')
     @stuhomework_1.ischecked = true
     @stuhomework_1.save
-    patch stuhomework_path(@stuhomework_1), stuhomework: { stuhomeworkfile: stuhomeworkfile1 }
+    patch stuhomework_path(@stuhomework_1), params: { stuhomework: { stuhomeworkfile: stuhomeworkfile1 } }
     @stuhomework_1.reload
     assert_equal @stuhomework_1[:stuhomeworkfile], "test.txt"
     assert_equal '已经批改过，无法进行修改', flash[:danger]
@@ -33,7 +33,7 @@ class StuhomeworkOptionsTest < ActionDispatch::IntegrationTest
   test "student create stuhomework" do
     log_in_as @user_1
     assert_difference 'Stuhomework.count', 1 do
-      post homework_stuhomeworks_path(homework_id: @homework.id), stuhomework: { stuhomeworkfile: Rack::Test::UploadedFile.new('./test/file/test.txt') }
+      post homework_stuhomeworks_path(homework_id: @homework.id), params: { stuhomework: { stuhomeworkfile: Rack::Test::UploadedFile.new('./test/file/test.txt') } }
     end
     assert_redirected_to @homework
   end

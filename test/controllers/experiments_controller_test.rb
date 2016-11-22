@@ -15,7 +15,7 @@ class ExperimentsControllerTest < ActionController::TestCase
   test "student can not create experiment" do
     log_in_as(@user1)
     assert_no_difference 'Experiment.count' do
-      post :create, experiment: { title: "title", description: "des", experimentfile: Rack::Test::UploadedFile.new('./test/file/test.txt') }
+      post :create, params: { experiment: { title: "title", description: "des", experimentfile: Rack::Test::UploadedFile.new('./test/file/test.txt') } }
     end
     assert_redirected_to root_url
   end
@@ -23,7 +23,7 @@ class ExperimentsControllerTest < ActionController::TestCase
   test "teacher can create the experiment" do
     log_in_as(@user_t)
     assert_difference 'Experiment.count', 1 do
-      post :create, experiment: { title: "title", description: "des", experimentfile: Rack::Test::UploadedFile.new('./test/file/test.txt') }
+      post :create, params: { experiment: { title: "title", description: "des", experimentfile: Rack::Test::UploadedFile.new('./test/file/test.txt') } }
     end
     assert_redirected_to experiments_url
   end

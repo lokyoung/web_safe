@@ -10,7 +10,7 @@ class UsersControllerTest < ActionController::TestCase
 
   test "fabricator user" do
     log_in_as @user4
-    get :edit, id: @user4.id
+    get :edit, params: { id: @user4.id }
     assert_response :success
   end
 
@@ -21,41 +21,41 @@ class UsersControllerTest < ActionController::TestCase
 
   test "user edit their own profile" do
     log_in_as @user1
-    get :edit, id: @user1.id
+    get :edit, params: { id: @user1.id }
     assert_response :success
-    patch :update, id: @user1.id, user: { name: 'aha' }
+    patch :update, params: { id: @user1.id, user: { name: 'aha' } }
     assert_redirected_to @user1
   end
 
   test "user edit fail" do
     log_in_as @user1
-    get :edit, id: @user1.id
+    get :edit, params: { id: @user1.id }
     assert_response :success
-    patch :update, id: @user1.id, user: { name: "" }
+    patch :update, params: { id: @user1.id, user: { name: "" } }
     assert_template 'users/edit'
   end
 
   test "normal user can't edit other user" do
     log_in_as @user1
-    get :edit, id: @user2.id
+    get :edit, params: { id: @user2.id }
     assert_redirected_to root_url
-    patch :update, id: @user2.id, user: { name: "aha" }
+    patch :update, params: { id: @user2.id, user: { name: "aha" } }
     assert_redirected_to root_url
   end
 
   test "teacher user can't edit other user" do
     log_in_as @user2
-    get :edit, id: @user1.id
+    get :edit, params: { id: @user1.id }
     assert_redirected_to root_url
-    patch :update, id: @user1.id, user: { name: "aha" }
+    patch :update, params: { id: @user1.id, user: { name: "aha" } }
     assert_redirected_to root_url
   end
 
   test "admin user can edit other user" do
     log_in_as @user3
-    get :edit, id: @user2.id
+    get :edit, params: { id: @user2.id }
     assert_response :success
-    patch :update, id: @user2.id, user: { name: "aha" }
+    patch :update, params: { id: @user2.id, user: { name: "aha" } }
     assert_redirected_to @user2
   end
 

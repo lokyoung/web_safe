@@ -14,12 +14,12 @@ class AdminAnnounceTest < ActionDispatch::IntegrationTest
     assert_select "div.panel-heading", text: "公告修改"
     assert_response :success
 
-    patch admin_announce_path(id: 1), announce: { title: "update",
-                                                  cotent: "update content" }
+    patch admin_announce_path(id: 1), params: { announce: { title: "update",
+                                                  cotent: "update content" } }
     assert_redirected_to admin_announces_url
 
-    patch admin_announce_path(id: 1), announce: { title: "",
-                                                  cotent: "update content" }
+    patch admin_announce_path(id: 1), params: { announce: { title: "",
+                                                  cotent: "update content" } }
     assert_select "div.panel-heading", text: "公告修改"
     assert_response :success
   end
@@ -36,7 +36,7 @@ class AdminAnnounceTest < ActionDispatch::IntegrationTest
     assert_select "div.panel-heading", text: "用户信息修改"
     assert_response :success
 
-    patch admin_user_path id: 1, user: { name: "admin" }
+    patch admin_user_path id: 1, params: { user: { name: "admin" } }
     assert_redirected_to admin_users_url
     user.reload
     assert_equal user.name, "admin"
@@ -55,7 +55,7 @@ class AdminAnnounceTest < ActionDispatch::IntegrationTest
     assert_select "div.panel-heading", text: "问题修改"
     assert_response :success
 
-    patch admin_question_path(question), question: { issolved: true }
+    patch admin_question_path(question), params: { question: { issolved: true } }
     assert_redirected_to admin_questions_url
     question.reload
     assert_equal question.issolved, true
@@ -74,7 +74,7 @@ class AdminAnnounceTest < ActionDispatch::IntegrationTest
     assert_select "div.panel-heading", text: "答案修改"
     assert_response :success
 
-    patch admin_answer_path(id: 1), answer: { content: 'edit' }
+    patch admin_answer_path(id: 1), params: { answer: { content: 'edit' } }
     answer.reload
     assert_equal answer.content, 'edit'
   end
@@ -94,7 +94,7 @@ class AdminAnnounceTest < ActionDispatch::IntegrationTest
     assert_select "div.panel-heading", text: "班级信息修改"
     assert_response :success
 
-    patch admin_stuclass_path(stuclass), stuclass: { scname: 'stuclass 1' }
+    patch admin_stuclass_path(stuclass), params: { stuclass: { scname: 'stuclass 1' } }
     stuclass.reload
     assert_equal stuclass.scname, 'stuclass 1'
   end
@@ -112,7 +112,7 @@ class AdminAnnounceTest < ActionDispatch::IntegrationTest
     get edit_admin_topic_path(topic)
     assert_response :success
 
-    patch admin_topic_path(topic), topic: { title: 'update', content: 'update content' }
+    patch admin_topic_path(topic), params: { topic: { title: 'update', content: 'update content' } }
     topic.reload
     assert_equal topic.title, 'update'
   end

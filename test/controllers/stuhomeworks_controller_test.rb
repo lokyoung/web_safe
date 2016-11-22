@@ -14,7 +14,7 @@ class StuhomeworksControllerTest < ActionController::TestCase
   test "student can create stuhomework" do
     log_in_as @user_1
     assert_difference 'Stuhomework.count', 1 do
-      post :create, homework_id: 1, stuhomework: { stuhomeworkfile: Rack::Test::UploadedFile.new('./test/file/test.txt') }
+      post :create, params: { homework_id: 1, stuhomework: { stuhomeworkfile: Rack::Test::UploadedFile.new('./test/file/test.txt') } }
     end
   end
 
@@ -26,7 +26,7 @@ class StuhomeworksControllerTest < ActionController::TestCase
     log_in_as @user_1
     # 可以成功修改自己的作业
     stuhomeworkfile = Rack::Test::UploadedFile.new('./test/file/test_e.txt')
-    patch :update, id: @stuhomework_1.id, stuhomework: { stuhomeworkfile: stuhomeworkfile }
+    patch :update, params: { id: @stuhomework_1.id, stuhomework: { stuhomeworkfile: stuhomeworkfile } }
     assert_redirected_to @stuhomework_1.homework
     @stuhomework_1 = reload_stuhomework(@stuhomework_1.id)
     assert_equal @stuhomework_1[:stuhomeworkfile], "test_e.txt"
@@ -34,7 +34,7 @@ class StuhomeworksControllerTest < ActionController::TestCase
     # 如果在setup中创建一个stuhomework，在这里会引发callback
     @stuhomework_1.update_attributes(ischecked: true)
     #@stuhomework_1.update_columns(ischecked: true)
-    patch :update, id: @stuhomework_1.id, stuhomework: { stuhomeworkfile: Rack::Test::UploadedFile.new('./test/file/test_2.txt') }
+    patch :update, params: { id: @stuhomework_1.id, stuhomework: { stuhomeworkfile: Rack::Test::UploadedFile.new('./test/file/test_2.txt') } }
     @stuhomework_1 = reload_stuhomework(@stuhomework_1.id)
     assert_equal @stuhomework_1[:stuhomeworkfile], "test_e.txt"
     assert_equal '已经批改过，无法进行修改', flash[:danger]
@@ -44,14 +44,14 @@ class StuhomeworksControllerTest < ActionController::TestCase
   test "can not edit others" do
     log_in_as @user_1
     stuhomeworkfile = Rack::Test::UploadedFile.new('./test/file/test_1.txt')
-    patch :update, id: @stuhomework_2.id, stuhomework: { stuhomeworkfile: stuhomeworkfile }
+    patch :update, params: { id: @stuhomework_2.id, stuhomework: { stuhomeworkfile: stuhomeworkfile } }
     assert_redirected_to root_url
   end
 
   test "admin can edit others" do
     log_in_as @user_a
     stuhomeworkfile = Rack::Test::UploadedFile.new('./test/file/test_e.txt')
-    patch :update, id: @stuhomework_1.id, stuhomework: { stuhomeworkfile: stuhomeworkfile }
+    patch :update, params: { id: @stuhomework_1.id, stuhomework: { stuhomeworkfile: stuhomeworkfile } }
     assert_redirected_to @stuhomework_1.homework
     @stuhomework_1 = reload_stuhomework(@stuhomework_1.id)
     assert_equal @stuhomework_1[:stuhomeworkfile], "test_e.txt"
@@ -59,11 +59,11 @@ class StuhomeworksControllerTest < ActionController::TestCase
 
   test "student can't check their homework" do
     log_in_as @user_1
-    get :check, id: @stuhomework_1.id
+    get :check, params: { id: @stuhomework_1.id }
     assert_redirected_to root_url
     assert_equal '权限不够，无法操作', flash[:warning]
 
-    patch :check_complete, id: @stuhomework_1.id, stuhomework: { mark: 100, remark: '不错' }
+    patch :check_complete, params: { id: @stuhomework_1.id, stuhomework: { mark: 100, remark: '不错' } }
     assert_redirected_to root_url
     assert_equal '权限不够，无法操作', flash[:warning]
   end
@@ -80,7 +80,7 @@ class StuhomeworksControllerTest < ActionController::TestCase
 
   test "teacher can check stuhomework" do
     log_in_as @user_t
-    patch :check_complete, id: @stuhomework_1.id, stuhomework: { mark: 100, remark: '不错' }
+    patch :check_complete, params: { id: @stuhomework_1.id, stuhomework: { mark: 100, remark: '不错' } }
     @stuhomework_1.reload
     assert_redirected_to @stuhomework_1.homework
     assert_equal @stuhomework_1.mark, 100

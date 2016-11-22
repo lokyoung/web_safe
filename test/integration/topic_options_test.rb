@@ -19,8 +19,9 @@ class TopicOptionsTest < ActionDispatch::IntegrationTest
     assert_select 'title', full_title('发布新话题')
 
     assert_difference 'Topic.count', 1 do
-      post_via_redirect topics_path, topic: { title: "new", content: "haha" }
+      post topics_path, params: { topic: { title: "new", content: "haha" } }
     end
+    follow_redirect!
     assert_equal '发布话题成功', flash[:success]
     assert_select 'title', full_title('自由讨论')
   end
@@ -33,11 +34,11 @@ class TopicOptionsTest < ActionDispatch::IntegrationTest
     assert_template 'topics/edit'
     assert_select 'title', full_title('修改话题')
 
-    patch topic_path @topic_1, topic: { title: "update", content: "update" }
+    patch topic_path @topic_1, params: { topic: { title: "update", content: "update" } }
     assert_redirected_to @topic_1
     assert_equal '修改话题成功', flash[:success]
 
-    patch topic_path @topic_1, topic: { title: "", content: "update" }
+    patch topic_path @topic_1, params: { topic: { title: "", content: "update" } }
     assert_template 'topics/edit'
 
   end
@@ -62,7 +63,7 @@ class TopicOptionsTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_url
     assert_equal '请不要尝试修改他人的内容', flash[:warning]
 
-    patch topic_path @topic_2, topic: { title: "update", content: "update" }
+    patch topic_path @topic_2, params: { topic: { title: "update", content: "update" } }
     assert_redirected_to root_url
     assert_equal '请不要尝试修改他人的内容', flash[:warning]
   end
@@ -83,7 +84,7 @@ class TopicOptionsTest < ActionDispatch::IntegrationTest
     assert_select 'title', full_title('修改话题')
     assert_template 'topics/edit'
 
-    patch topic_path @topic_2, topic: { title: "update", content: "update" }
+    patch topic_path @topic_2, params: { topic: { title: "update", content: "update" } }
     assert_redirected_to @topic_2
     assert_equal '修改话题成功', flash[:success]
 
