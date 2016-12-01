@@ -21,7 +21,7 @@ class Admin::CommentsController < Admin::AdminController
   def destroy
     Comment.find(params[:id]).destroy
     flash[:success] = '评论删除成功'
-    redirect_to :back
+    redirect_back
   end
 
   private
