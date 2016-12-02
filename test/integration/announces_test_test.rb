@@ -54,7 +54,8 @@ class AnnouncesTestTest < ActionDispatch::IntegrationTest
     assert_select 'title', full_title('发布公告')
 
     assert_difference 'Announce.count', 1 do
-      post_via_redirect announces_path, params: { announce: { title: "new", content: "haha" } }
+      post announces_path, params: { announce: { title: "new", content: "haha" } }
+      follow_redirect!
     end
     assert_equal '发布公告成功！', flash[:success]
     assert_select 'title', full_title('首页')

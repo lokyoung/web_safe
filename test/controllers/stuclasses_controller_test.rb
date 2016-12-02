@@ -15,13 +15,13 @@ class StuclassesControllerTest < ActionController::TestCase
     assert_redirected_to root_url
   end
 
-  test "teacher can create the stuclass" do
-    log_in_as @user_2
-    assert_difference 'Stuclass.count', 1 do
-      post :create, params: { stuclass: { scname: 'class 1' } }
-    end
-    assert_redirected_to stuclasses_url
-  end
+  # test "teacher can create the stuclass" do
+  #   log_in_as @user_2
+  #   assert_difference 'Stuclass.count', 1 do
+  #     post :create, params: { stuclass: { scname: 'class 1' } }
+  #   end
+  #   assert_redirected_to stuclasses_url
+  # end
 
   test "teacher can edit the stuclass" do
     log_in_as @user_2

@@ -19,7 +19,7 @@ class Admin::AnnouncesControllerTest < ActionController::TestCase
     end
     assert_select "span.next"
 
-    get :index, page: 4
+    get :index, params: { page: 4 }
     assert_response :success
     assert_select "span.prev"
   end
