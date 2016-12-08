@@ -53,7 +53,7 @@ gem 'kaminari'
 # 验证码
 gem 'rucaptcha'
 # 使用puma服务器
-gem 'puma'
+# gem 'puma'
 # 产生数据以供测试使用
 gem 'faker'
 # 测试数据
