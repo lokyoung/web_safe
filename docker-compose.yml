@@ -1,0 +1,13 @@
+version: '2'
+services:
+  postgres:
+    image: postgres
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/websafe
+    depends_on:
+      - db
+
