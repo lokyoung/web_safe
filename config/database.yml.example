@@ -19,7 +19,7 @@ development:
 
 test:
   <<: *default
-  adapter: web_safe_test
+  host: web_safe_test
   username: postgres
   password: 123321
   host: 127.0.0.1
@@ -27,7 +27,7 @@ test:
 
 production:
   <<: *default
-  adapter: web_safe_prod
+  host: web_safe_prod
   username: vagrant
   password: 123456
   host: 127.0.0.1
