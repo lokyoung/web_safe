@@ -10,4 +10,3 @@ services:
       - .:/websafe
     depends_on:
       - db
-
